@@ -24,7 +24,7 @@ function LoginComponent(props) {
                     <Form.Label>Пароль</Form.Label>
                     <Form.Control type="password" placeholder="Введите Пароль" value={props.data.password} onChange={props.passwordChange}/>
                 </Form.Group>
-                <Button variant="primary" onClick={props.handleSubmit}>
+                <Button variant="primary" onClick={props.handleEnter}>
                     Войти
                 </Button>
             </Form>
