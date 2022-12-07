@@ -1,10 +1,15 @@
 import React, {Component} from "react"
 import LoginComponent from "./LoginComponent"
 import Request from "../../model/Request"
+import {withRouter} from '../../model/withRouter';
+import { useNavigate } from "react-router-dom"
+
 
 class Login extends Component {
+    
     constructor() {
         super()
+        
         this.state = {
             login: "",
             password: "",
@@ -39,6 +44,7 @@ class Login extends Component {
         */
         let result = await Request.pingAsync();
         console.log(result);
+        this.props.navigate('/profile')
         event.preventDefault();
     }
     
@@ -54,4 +60,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default withRouter(Login);
