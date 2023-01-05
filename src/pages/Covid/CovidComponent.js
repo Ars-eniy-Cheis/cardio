@@ -1,4 +1,4 @@
-import {React, useEffect, useState} from "react"
+import {React, useEffect, useState, useRef} from "react"
 
 import {withRouter} from '../../model/withRouter';
 
@@ -18,6 +18,8 @@ import './Covid.css';
 function CovidComponent(props) {
 
   const [covidPatients, setCovidPatients] = useState(new CovidPatients());
+  const [covidPatientsState, setCovidPatientsState] = useState(false);
+  const didMount = useRef(false);
 
   //let covidPatients = new CovidPatients()
 
@@ -37,14 +39,19 @@ function CovidComponent(props) {
 
   const getTable = async () => {
     await covidPatients.getPatients(localStorage.getItem('accessToken'), localStorage.getItem('refreshToken'))
+    setCovidPatientsState(true)
+    //setCovidPatients(covidPatients)
   }
 
   useEffect(() => {
-    getTable()
-    setCovidPatients(covidPatients)
+    if ( !didMount.current ) {
+      getTable()
+      return didMount.current = true;
+    }
     console.log(covidPatients.patients)
     
-  }, [covidPatients.patients]);
+  }, []);
+  
 
   const handleExit = async () => {
     console.log("exit");

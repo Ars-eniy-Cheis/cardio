@@ -35,6 +35,7 @@ class CovidPatients {
             this.patients.push(new CovidPatient(patientsAnswer[i].id, patientsAnswer[i].dateOfAdmission, patientsAnswer[i].probabilityOfDeath))
         }
     }
+
 }
 
 export default CovidPatients
