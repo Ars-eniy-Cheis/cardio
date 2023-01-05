@@ -1,15 +1,9 @@
-const path = "http://cardio/api/v1/";
-
-function ping(){
-    pingAsync()
-    .then(function(answer){
-        console.log("Ping " + answer)
-        return answer;
-    })
-}
+const path = "http://46.181.193.240:8080/kardio/api/";
+//const path = "http://localhost:9000/api/";
+//http://localhost:9000/api/users/login
 
 async function pingAsync(){
-    let response = await fetch("https://www.breakingbadapi.com/api/1", {
+    let response = await fetch(path + "ping", {
         method: "GET", headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -17,13 +11,6 @@ async function pingAsync(){
     })
     //console.log("PingAsync" + response)
     return response
-}
-
-function login(loginJSON){
-    loginAsync(loginJSON)
-    .then(function(answer){
-        return answer
-    })
 }
 
 async function loginAsync(loginJSON){
@@ -35,7 +22,8 @@ async function loginAsync(loginJSON){
         },
         body: loginJSON
     })
-    return response.json()
+    //console.log(await response.json())
+    return response
 }
 
-export default {pingAsync, login}
+export default {pingAsync, loginAsync}
