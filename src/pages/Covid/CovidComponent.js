@@ -1,110 +1,83 @@
-import {React, useEffect, useState, useRef} from "react"
+import { React, useEffect, useState, useRef } from "react"
+import { useDispatch, useSelector } from "react-redux";
 
-import {withRouter} from '../../model/withRouter';
+import { withRouter } from '../../model/withRouter';
 
 import CovidPatients from '../../model/dataClasses/CovidPatients'
-import CovidPatient from '../../model/dataClasses/CovidPatient'
 
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import Table from 'react-bootstrap/Table';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import CovidTableData from '../../components/CovidTableData/CovidTableData'
 
-import './Covid.css';
+import Covid from "./Covid";
+
+
 
 function CovidComponent(props) {
 
   const [covidPatients, setCovidPatients] = useState(new CovidPatients());
-  const [covidPatientsState, setCovidPatientsState] = useState(false);
   const didMount = useRef(false);
 
-  //let covidPatients = new CovidPatients()
+  const dispatch = useDispatch()
+  const covidPatientsState = useSelector(state => state.covidPatients)
 
-  let DisplayData = covidPatients.patients.map(
-      (item)=>{
-        return(
-          <tr className="table-light">
-            <td>{item.id}</td>
-            <td>{item.dateOfAdmission}</td>
-            <td>{item.probabilityOfDeath}</td>
-            <td> sd </td>
-            <td> sd </td>
-          </tr>
-        )
-      }
-    )
+  const setPatientsState = (patientsValue) => {
+    dispatch({ type: "SET_COVID_PATIENTS", covidPatients: patientsValue })
+  }
 
   const getTable = async () => {
     await covidPatients.getPatients(localStorage.getItem('accessToken'), localStorage.getItem('refreshToken'))
-    setCovidPatientsState(true)
-    //setCovidPatients(covidPatients)
+    setPatientsState(covidPatients.patients)
   }
 
   useEffect(() => {
-    if ( !didMount.current ) {
+    if (!didMount.current) {
       getTable()
-      return didMount.current = true;
     }
     console.log(covidPatients.patients)
-    
+
   }, []);
-  
 
   const handleExit = async () => {
-    console.log("exit");
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
     props.navigate('/')
   }
 
-  
+  const handleNewPatient = async () => {
+    props.navigate('/profile/covid/new-patient')
+  }
 
-    return (
-        <div className="p-3 mb-2 bg-info text-dark bg-opacity-25"> 
-            <div>
-            <Breadcrumb className="breadcrumb">
-                <Breadcrumb.Item className="breadcrumb" href="/profile">Выбор сервиса</Breadcrumb.Item>
-                <Breadcrumb.Item className="breadcrumb" active>COVID</Breadcrumb.Item>
-            </Breadcrumb>
+  const handleChange = (id) => {
+    console.log(id);
+  }
 
-            <Button variant="primary" className="exitButton" onClick={handleExit}>
-                    Выйти
-            </Button>
-            </div>
-        <div className="jumbotron vertical-center">
-            <Container>
-            <Table className="table table-bordered">
-      <thead>
-        <tr className="table-light">
-          <th>ID</th>
-          <th>Дата поступления</th>
-          <th>Вероятность летального исхода</th>
-          <th> </th>
-          <th> </th>
-        </tr>
-      </thead>
+  const handleDelete = (id) => {
+    covidPatientsState.splice(id, 1)
+    let newCovidPatientsState = covidPatientsState.slice()
+    setPatientsState(newCovidPatientsState)
+  }
 
-      <tbody>
-        { DisplayData }
-      </tbody>
-    </Table>
-            </Container>
-        </div>
-        </div>
-    )
+  let tableData = covidPatientsState.map(
+    (item, i) => {
+      return (
+        <CovidTableData
+          arrayId={i}
+          id={item.id}
+          dateOfAdmission={item.dateOfAdmission}
+          probabilityOfDeath={item.probabilityOfDeath}
+          handleChange={handleChange}
+          handleDelete={handleDelete}
+        />
+      )
+    }
+  )
+
+  return (
+    <Covid
+      handleExit={handleExit}
+      tableData={tableData}
+      handleNewPatient={handleNewPatient}
+    />
+  )
 }
-
-/*
-<tr  >
-          <td>1</td>
-          <td>12.11.2022</td>
-          <td>10%</td>
-          <td> <button className="link">изменить</button> </td>
-          <td> удалить </td>
-        </tr>
-*/
 
 export default withRouter(CovidComponent)

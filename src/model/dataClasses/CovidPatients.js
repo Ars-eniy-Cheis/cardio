@@ -18,6 +18,7 @@ class CovidPatients {
                 id: 1,
                 dateOfAdmission: 1672954195,
                 probabilityOfDeath: 10
+                
             },
             {
                 id: 2,

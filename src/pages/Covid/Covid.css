@@ -10,9 +10,16 @@
     display:inline-block;
   }
 
-  .exitButton{
+  .covidButton{
     display:inline-block;
     float:right;
   }
 
-  button.link { background:none; border:none; }
+  button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}

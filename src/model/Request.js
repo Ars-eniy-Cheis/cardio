@@ -2,7 +2,7 @@ const path = "http://46.181.193.240:8080/kardio/api/";
 //const path = "http://localhost:9000/api/";
 //http://localhost:9000/api/users/login
 
-async function pingAsync(){
+async function pingAsync() {
     let response = await fetch(path + "ping", {
         method: "GET", headers: {
             'Accept': 'application/json',
@@ -13,9 +13,9 @@ async function pingAsync(){
     return response
 }
 
-async function loginAsync(loginJSON){
+async function loginAsync(loginJSON) {
     let response = await fetch(path + "users/login", {
-        method: "POST", 
+        method: "POST",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -26,4 +26,4 @@ async function loginAsync(loginJSON){
     return response
 }
 
-export default {pingAsync, loginAsync}
+export default { pingAsync, loginAsync }

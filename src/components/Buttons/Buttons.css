@@ -1,0 +1,11 @@
+.right-button-in-form{
+    margin-left: 0px;
+    margin-top: 10px;
+    float: right;
+}
+
+.left-button-in-form{
+    margin-right: 40px;
+    margin-top: 10px;
+    float: left;
+}

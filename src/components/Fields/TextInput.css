@@ -1,0 +1,23 @@
+.quantity {
+    position: relative;
+  }
+  
+  .quantity input {
+    width: 60px;
+    height: 42px;
+    line-height: 1.65;
+    float: right;
+    padding: 0;
+    margin-left: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: 2px solid black;
+  }
+  
+  .quantity input:focus {
+    outline: 0;
+  }
+
+  .required{
+    color: red;
+  }
