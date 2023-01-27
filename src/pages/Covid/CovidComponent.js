@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from '../../model/withRouter';
 
 import Patients from '../../model/dataClasses/Patients'
+import Patient from '../../model/dataClasses/Patient'
+import Token from '../../model/dataClasses/Token'
 
 import CovidTableData from '../../components/CovidTableData/CovidTableData'
 
@@ -28,7 +30,7 @@ function CovidComponent(props) {
   }
 
   const getTable = async () => {
-    await covidPatients.getPatients(localStorage.getItem('accessToken'), localStorage.getItem('refreshToken'))
+    await covidPatients.getPatients(localStorage.getItem('accessToken'))
     setPatientsState(covidPatients.patients)
   }
 
@@ -57,11 +59,30 @@ function CovidComponent(props) {
     props.navigate('/profile/covid/patient')
   }
 
-  const handleDelete = (id) => {
-    covidPatientsState.splice(id, 1)
-    let newCovidPatientsState = covidPatientsState.slice()
-    setPatientsState(newCovidPatientsState)
-    console.log(id)
+  const handleDelete = async (id) => {
+    let patient = new Patient({})
+
+    await patient.deletePatient(localStorage.getItem('accessToken'), id)
+
+    if (patient.status >= 200 && patient.status < 300) {
+      covidPatientsState.splice(id, 1)
+      let newCovidPatientsState = covidPatientsState.slice()
+      setPatientsState(newCovidPatientsState)
+      console.log(id)
+    }
+    else{
+      let token = new Token()
+      let updatedToken = await token.updateToken(localStorage.getItem('refreshToken'))
+      if (token.status >= 200 && token.status < 300) {
+        localStorage.setItem('accessToken', updatedToken.accessToken)
+        localStorage.setItem('refreshToken', updatedToken.refreshToken)
+      }
+      else{
+        handleExit()
+      }
+    }
+    //id
+
   }
 
   let tableData = covidPatientsState.map(

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Form } from "usetheform";
 
 import TextInput from "../../Fields/TextInput";
@@ -13,11 +14,19 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function WizardFormSecondPage({ prevPage, ...props }) {
+
+  const covidDeathProbability = useSelector(state => state.covidDeathProbability)
+
   let selected
-  if (props.currentPatient != "")
+  let submit
+  if (props.currentPatient != ""){
     selected = props.currentPatient
-  else
+    submit = "Применить"
+  }
+  else{
+    submit = "Расчитать результат"
     selected = ""
+  }
   return (
     <div className="form-container" >
       <Form {...props}>
@@ -32,9 +41,17 @@ function WizardFormSecondPage({ prevPage, ...props }) {
               <DoubleSelection selected={selected.hbp} title={"ХБП (3-5) "} first={"Есть "} second={"Нет "} name={"HBP"} value1={"true"} value2={"false"} />
             </Col>
             <Col>
+            </Col>
+            <Col>
               <TextInput value={selected.crp} type={"text"} label="CRP " name="CRP" />
               <TextInput value={selected.skf} type={"text"} label="СКФ (CKD-EPI 2021)" name="SKF" />
               <TextInput value={selected.neutrophilLymphocyteRatio} type={"text"} label="Нейтрофильно-лимфоцитарное состояние" name="Neutrophil-lymphocyteRatio" />
+              <br />
+              <br />
+              <div className="pretty-text">
+                Вероятность летального исхода: {covidDeathProbability}
+              </div>
+              <Submit type="submit">Расчитать результат</Submit>
             </Col>
           </Row>
         </Container>
@@ -43,10 +60,9 @@ function WizardFormSecondPage({ prevPage, ...props }) {
             <Button type="button" className="left-button-in-form" onClick={prevPage}>
               Назад
             </Button>
-            <Submit type="submit">Расчитать результат</Submit>
+            <Reset /> 
             <br />
             <br />
-            <Reset />
           </div>
         </div>
       </Form>

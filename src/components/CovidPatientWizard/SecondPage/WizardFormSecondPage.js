@@ -27,7 +27,8 @@ function WizardFormSecondPage({ prevPage, ...props }) {
               <TextInput value={selected.creatinine} type={"text"} label="Креатини" name="creatinine" />
               <TextInput value={selected.ast} type={"text"} label="АСТ" name="AST" />
               <TextInput value={selected.alt} type={"text"} label="АЛТ" name="ALT" />
-
+            </Col>
+            <Col>
             </Col>
             <Col>
               <TextInput value={selected.glucose} type={"text"} label="Глюкоза" name="glucose" />

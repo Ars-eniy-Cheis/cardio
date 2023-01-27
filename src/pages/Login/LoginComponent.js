@@ -31,8 +31,7 @@ function LoginComponent(props) {
     const handleEnter = async () => {
         let token = new Token()
         await token.getToken(login, password)
-        //if (token.answer.ok) {
-        if (true) {
+        if (token.status >= 200 && token.status < 300) {
             setLoginState(login)
             localStorage.setItem('accessToken', token.accessToken)
             localStorage.setItem('refreshToken', token.refreshToken)

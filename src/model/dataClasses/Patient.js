@@ -1,5 +1,10 @@
+import Request from "../Request"
+
+
 class Patient {
-    constructor(id, dateOfAdmission, probabilityOfDeath, 
+//
+/*
+id, dateOfAdmission, probabilityOfDeath, 
         sex, age, urea, creatinine, ast, alt, glucose, leukocytes, 
         platelets, neutrophils, lymphocytes, dDimer, ag, sd, ibs, hobl, 
         hbp, crp, skf, neutrophilLymphocyteRatio, cabsType, bmi, overweight, 
@@ -12,93 +17,129 @@ class Patient {
         akk, iapf, spironolactone, diuretics, cordaron, hospitalizationDuration, 
         ceaFteer, ancoPerationsAfter, antiplateletAgentsAfter, anticoagulants, 
         babAfter, akkAfter, iAPFAfter, araAfter, diureticsAfter, statins, 
-        heartAttack, PCI, insult, death) 
+        heartAttack, PCI, insult, death
+*/
+    constructor(object) 
         {
-        this.id = id;
-        this.dateOfAdmission = dateOfAdmission;
-        this.probabilityOfDeath = probabilityOfDeath;
-        this.sex = sex;
-        this.age = age;
-        this.urea = urea;
-        this.creatinine = creatinine;
-        this.ast = ast;
-        this.alt = alt;
-        this.glucose = glucose;
-        this.leukocytes = leukocytes;
-        this.platelets = platelets;
-        this.neutrophils = neutrophils;
-        this.lymphocytes = lymphocytes;
-        this.dDimer = dDimer;
-        this.ag = ag;
-        this.sd = sd;
-        this.ibs = ibs;
-        this.hobl = hobl;
-        this.hbp = hbp;
-        this.crp = crp;
-        this.skf = skf;
-        this.neutrophilLymphocyteRatio = neutrophilLymphocyteRatio;
-        this.cabsType = cabsType;
-        this.bmi = bmi;
-        this.overweight = overweight;
-        this.smoking = smoking;
-        this.heredity = heredity;
-        this.dyslipidemia = dyslipidemia;
-        this.hoblBa = hoblBa;
-        this.piks = piks;
-        this.fp = fp;
-        this.su = su; 
-        this.th = th;
-        this.varicose = varicose;
-        this.cardiacLesions = cardiacLesions;
-        this.llaLesions = llaLesions;
-        this.fcAnginaPectoris = fcAnginaPectoris;
-        this.fcchf = fcchf;
-        this.lvef = lvef;
-        this.is = is;
-        this.euroScore2 = euroScore2;
-        this.ik = ik;
-        this.ikTime = ikTime;
-        this.aorticClampTime = aorticClampTime;
-        this.tBodies = tBodies;
-        this.numberOfCardioplegias = numberOfCardioplegias;
-        this.vpLz = vpLz;
-        this.revascularizationIndex = revascularizationIndex;
-        this.tTypeCobs = tTypeCobs;
-        this.limaExcretion = limaExcretion;
-        this.rimaExcretion = rimaExcretion;
-        this.laUsage = laUsage;
-        this.avUsage = avUsage;
-        this.bloodLoss = bloodLoss;
-        this.alvTime = alvTime;
-        this.inotropicSupport = inotropicSupport;
-        this.pneumonia = pneumonia;
-        this.sn = sn;
-        this.fpTp = fpTp;
-        this.pleuralEffusion = pleuralEffusion;
-        this.hydropericardium = hydropericardium;
-        this.pneumothorax = pneumothorax;
-        this.sternalComplications = sternalComplications;
-        this.akk = akk;
-        this.iapf = iapf;
-        this.spironolactone = spironolactone;
-        this.diuretics = diuretics;
-        this.cordaron = cordaron;
-        this.hospitalizationDuration = hospitalizationDuration;
-        this.ceaFteer = ceaFteer;
-        this.ancoPerationsAfter = ancoPerationsAfter;
-        this.antiplateletAgentsAfter = antiplateletAgentsAfter;
-        this.anticoagulants = anticoagulants;
-        this.babAfter = babAfter;
-        this.akkAfter = akkAfter;
-        this.iAPFAfter = iAPFAfter;
-        this.araAfter = araAfter;
-        this.diureticsAfter = diureticsAfter;
-        this.statins = statins;
-        this.heartAttack = heartAttack;
-        this.PCI = PCI;
-        this.insult = insult;
-        this.death = death;
+
+        this.answer = {};
+        this.status = 200;
+
+        this.id = object.id;
+        this.dateOfAdmission = object.dateOfAdmission;
+        this.probabilityOfDeath = object.probabilityOfDeath;
+        this.sex = object.sex;
+        this.age = object.age;
+        this.urea = object.urea;
+        this.creatinine = object.creatinine;
+        this.ast = object.ast;
+        this.alt = object.alt;
+        this.glucose = object.glucose;
+        this.leukocytes = object.leukocytes;
+        this.platelets = object.platelets;
+        this.neutrophils = object.neutrophils;
+        this.lymphocytes = object.lymphocytes;
+        this.dDimer = object.dDimer;
+        this.ag = object.ag;
+        this.sd = object.sd;
+        this.ibs = object.ibs;
+        this.hobl = object.hobl;
+        this.hbp = object.hbp;
+        this.crp = object.crp;
+        this.skf = object.skf;
+        this.neutrophilLymphocyteRatio = object.neutrophilLymphocyteRatio;
+        this.cabsType = object.cabsType;
+        this.bmi = object.bmi;
+        this.overweight = object.overweight;
+        this.smoking = object.smoking;
+        this.heredity = object.heredity;
+        this.dyslipidemia = object.dyslipidemia;
+        this.hoblBa = object.hoblBa;
+        this.piks = object.piks;
+        this.fp = object.fp;
+        this.su = object.su; 
+        this.th = object.th;
+        this.varicose = object.varicose;
+        this.cardiacLesions = object.cardiacLesions;
+        this.llaLesions = object.llaLesions;
+        this.fcAnginaPectoris = object.fcAnginaPectoris;
+        this.fcchf = object.fcchf;
+        this.lvef = object.lvef;
+        this.is = object.is;
+        this.euroScore2 = object.euroScore2;
+        this.ik = object.ik;
+        this.ikTime = object.ikTime;
+        this.aorticClampTime = object.aorticClampTime;
+        this.tBodies = object.tBodies;
+        this.numberOfCardioplegias = object.numberOfCardioplegias;
+        this.vpLz = object.vpLz;
+        this.revascularizationIndex = object.revascularizationIndex;
+        this.tTypeCobs = object.tTypeCobs;
+        this.limaExcretion = object.limaExcretion;
+        this.rimaExcretion = object.rimaExcretion;
+        this.laUsage = object.laUsage;
+        this.avUsage = object.avUsage;
+        this.bloodLoss = object.bloodLoss;
+        this.alvTime = object.alvTime;
+        this.inotropicSupport = object.inotropicSupport;
+        this.pneumonia = object.pneumonia;
+        this.sn = object.sn;
+        this.fpTp = object.fpTp;
+        this.pleuralEffusion = object.pleuralEffusion;
+        this.hydropericardium = object.hydropericardium;
+        this.pneumothorax = object.pneumothorax;
+        this.sternalComplications = object.sternalComplications;
+        this.akk = object.akk;
+        this.iapf = object.iapf;
+        this.spironolactone = object.spironolactone;
+        this.diuretics = object.diuretics;
+        this.cordaron = object.cordaron;
+        this.hospitalizationDuration = object.hospitalizationDuration;
+        this.ceaFteer = object.ceaFteer;
+        this.ancoPerationsAfter = object.ancoPerationsAfter;
+        this.antiplateletAgentsAfter = object.antiplateletAgentsAfter;
+        this.anticoagulants = object.anticoagulants;
+        this.babAfter = object.babAfter;
+        this.akkAfter = object.akkAfter;
+        this.iAPFAfter = object.iAPFAfter;
+        this.araAfter = object.araAfter;
+        this.diureticsAfter = object.diureticsAfter;
+        this.statins = object.statins;
+        this.heartAttack = object.heartAttack;
+        this.PCI = object.PCI;
+        this.insult = object.insult;
+        this.death = object.death;
     }
+
+    async addPatient(accessToken, patientJSON){
+        console.log(patientJSON);
+        //this.answer = await Request.addPatientAsync(refreshToken, patientJSON)
+        //this.status = await this.answer.status
+        //let patient = await this.answer.json()
+        //return patient
+    }
+    
+    async getPatient(accessToken, patientID){
+        //this.answer = await Request.getPatientAsync(accessToken, patientID)
+        //this.status = await this.answer.status
+        //let patient = await this.answer.json()
+        //return patient
+    }
+
+    async deletePatient(accessToken, patientID){
+        //this.answer = await Request.deletePatientAsync(accessToken, patientID)
+        //this.status = await this.answer.status
+        //let patient = await this.answer.json()
+        //return patient
+    }
+
+    async patchPatient(accessToken, patientID, patientJSON){
+        //this.answer = await Request.patchPatientAsync(accessToken, patientID, patientJSON)
+        //this.status = await this.answer.status
+        //let patient = await this.answer.json()
+        //return patient
+    }
+
 }
 
 export default Patient

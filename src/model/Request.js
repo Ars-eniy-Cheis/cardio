@@ -79,6 +79,34 @@ async function getPatientAsync(accessToken, patientID) {
     return response
 }
 
+async function deletePatientAsync(accessToken, patientID) {
+    let response = await fetch(path + "patients/"+patientID, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': accessToken
+        },
+    })
+    //console.log(await response.json())
+    return response
+}
 
+async function patchPatientAsync(accessToken, patientID, patientJSON) {
+    let response = await fetch(path + "patients/"+patientID, {
+        method: "PATCH",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': accessToken
+        },
+        body: patientJSON
+    })
+    //console.log(await response.json())
+    return response
+}
 
-export default { pingAsync, loginAsync, refreshTokenAsync, getPatientsAsync, addPatientAsync, getPatientAsync}
+export default { 
+    pingAsync, loginAsync, refreshTokenAsync, getPatientsAsync, addPatientAsync, 
+    getPatientAsync, deletePatientAsync, patchPatientAsync
+}

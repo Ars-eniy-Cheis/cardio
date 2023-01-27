@@ -18,7 +18,7 @@ function CovidNewPatient(props) {
     const prevPage = props.prevPage
     const onSubmitWizard = props.onSubmitWizard
 
-    console.log(props);
+    //console.log(props);
     return (
         <div >
             <div>

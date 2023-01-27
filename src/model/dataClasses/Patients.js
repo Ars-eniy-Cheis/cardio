@@ -7,11 +7,15 @@ import Patient from './Patient'
 class Patients {
 
     constructor(){
-        this.answer = true;
+        this.answer = {};
+        this.status = 200;
         this.patients = []
     }
+    async getPatients(accessToken){
 
-    async getPatients(accessToken, refreshToken){
+        //this.answer = await getPatientsAsync(accessToken)
+        //this.status = await this.answer.status
+        //let patientsAnswer = await this.answer.json()
 
         let patientsAnswer = [
             {
@@ -276,20 +280,7 @@ class Patients {
         ]
 
         for(let i = 0; i < patientsAnswer.length; i++){
-            this.patients.push(new Patient(patientsAnswer[i].id, patientsAnswer[i].dateOfAdmission, patientsAnswer[i].probabilityOfDeath, 
-        patientsAnswer[i].sex, patientsAnswer[i].age, patientsAnswer[i].urea, patientsAnswer[i].creatinine, patientsAnswer[i].ast, patientsAnswer[i].alt, patientsAnswer[i].glucose, patientsAnswer[i].leukocytes, 
-        patientsAnswer[i].platelets, patientsAnswer[i].neutrophils, patientsAnswer[i].lymphocytes, patientsAnswer[i].dDimer, patientsAnswer[i].ag, patientsAnswer[i].sd, patientsAnswer[i].ibs, patientsAnswer[i].hobl, 
-        patientsAnswer[i].hbp, patientsAnswer[i].crp, patientsAnswer[i].skf, patientsAnswer[i].neutrophilLymphocyteRatio, patientsAnswer[i].cabsType, patientsAnswer[i].bmi, patientsAnswer[i].overweight, 
-        patientsAnswer[i].smoking, patientsAnswer[i].heredity, patientsAnswer[i].dyslipidemia, patientsAnswer[i].hoblBa, patientsAnswer[i].piks, patientsAnswer[i].fp, patientsAnswer[i].su, patientsAnswer[i].th, patientsAnswer[i].varicose, 
-        patientsAnswer[i].cardiacLesions, patientsAnswer[i].llaLesions, patientsAnswer[i].fcAnginaPectoris, patientsAnswer[i].fcchf, patientsAnswer[i].lvef, patientsAnswer[i].is, patientsAnswer[i].euroScore2, 
-        patientsAnswer[i].ik, patientsAnswer[i].ikTime, patientsAnswer[i].aorticClampTime, patientsAnswer[i].tBodies, patientsAnswer[i].numberOfCardioplegias, patientsAnswer[i].vpLz, 
-        patientsAnswer[i].revascularizationIndex, patientsAnswer[i].tTypeCobs, patientsAnswer[i].limaExcretion, patientsAnswer[i].rimaExcretion, patientsAnswer[i].laUsage, 
-        patientsAnswer[i].avUsage, patientsAnswer[i].bloodLoss, patientsAnswer[i].alvTime, patientsAnswer[i].inotropicSupport, patientsAnswer[i].pneumonia, patientsAnswer[i].sn, patientsAnswer[i].fpTp, 
-        patientsAnswer[i].pleuralEffusion, patientsAnswer[i].hydropericardium, patientsAnswer[i].pneumothorax, patientsAnswer[i].sternalComplications, 
-        patientsAnswer[i].akk, patientsAnswer[i].iapf, patientsAnswer[i].spironolactone, patientsAnswer[i].diuretics, patientsAnswer[i].cordaron, patientsAnswer[i].hospitalizationDuration, 
-        patientsAnswer[i].ceaFteer, patientsAnswer[i].ancoPerationsAfter, patientsAnswer[i].antiplateletAgentsAfter, patientsAnswer[i].anticoagulants, 
-        patientsAnswer[i].babAfter, patientsAnswer[i].akkAfter, patientsAnswer[i].iAPFAfter, patientsAnswer[i].araAfter, patientsAnswer[i].diureticsAfter, patientsAnswer[i].statins, 
-        patientsAnswer[i].heartAttack, patientsAnswer[i].PCI, patientsAnswer[i].insult, patientsAnswer[i].death))
+            this.patients.push(new Patient(patientsAnswer[i]))
         }
     }
 
