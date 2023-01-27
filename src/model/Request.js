@@ -26,4 +26,59 @@ async function loginAsync(loginJSON) {
     return response
 }
 
-export default { pingAsync, loginAsync }
+async function refreshTokenAsync(refreshToken) {
+    let response = await fetch(path + "tokens/refresh", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': refreshToken
+        },
+    })
+    //console.log(await response.json())
+    return response
+}
+
+async function getPatientsAsync(accessToken) {
+    let response = await fetch(path + "patients", {
+        method: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': accessToken
+        },
+    })
+    //console.log(await response.json())
+    return response
+}
+
+async function addPatientAsync(refreshToken, patientJSON) {
+    let response = await fetch(path + "patients", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': refreshToken
+        },
+        body: patientJSON
+    })
+    //console.log(await response.json())
+    return response
+}
+
+async function getPatientAsync(accessToken, patientID) {
+    let response = await fetch(path + "patients/"+patientID, {
+        method: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': accessToken
+        },
+    })
+    //console.log(await response.json())
+    return response
+}
+
+
+
+export default { pingAsync, loginAsync, refreshTokenAsync, getPatientsAsync, addPatientAsync, getPatientAsync}

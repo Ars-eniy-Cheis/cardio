@@ -12,25 +12,29 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function WizardFormSecondPage({ prevPage, ...props }) {
-  console.log(props)
+  let selected
+  if (props.currentPatient != "")
+    selected = props.currentPatient
+  else
+    selected = ""
   return (
     <div className="form-container" >
       <Form {...props}>
         <Container>
           <Row>
             <Col>
-              <TextInput type={"text"} label="Мочевина" name="urea" />
-              <TextInput type={"text"} label="Креатини" name="creatinine" />
-              <TextInput type={"text"} label="АСТ" name="AST" />
-              <TextInput type={"text"} label="АЛТ" name="ALT" />
+              <TextInput value={selected.urea} type={"text"} label="Мочевина" name="urea" />
+              <TextInput value={selected.creatinine} type={"text"} label="Креатини" name="creatinine" />
+              <TextInput value={selected.ast} type={"text"} label="АСТ" name="AST" />
+              <TextInput value={selected.alt} type={"text"} label="АЛТ" name="ALT" />
 
             </Col>
             <Col>
-              <TextInput type={"text"} label="Глюкоза" name="glucose" />
-              <TextInput type={"text"} label="Лейкоциты" name="leukocytes" />
-              <TextInput type={"text"} label="Тромбоциты" name="platelet" />
-              <TextInput type={"text"} label="Нейтрофилы" name="neutrophils" />
-              <TextInput type={"text"} label="Лимфоциты" name="lymphocytes" />
+              <TextInput value={selected.glucose} type={"text"} label="Глюкоза" name="glucose" />
+              <TextInput value={selected.leukocytes} type={"text"} label="Лейкоциты" name="leukocytes" />
+              <TextInput value={selected.platelets} type={"text"} label="Тромбоциты" name="platelets" />
+              <TextInput value={selected.neutrophils} type={"text"} label="Нейтрофилы" name="neutrophils" />
+              <TextInput value={selected.lymphocytes} type={"text"} label="Лимфоциты" name="lymphocytes" />
             </Col>
           </Row>
         </Container>

@@ -1,6 +1,7 @@
 const defaultState = {
     login: "",
     covidPatients: [],
+    currentCovidPatientId: -1,
   }
   
 function reducer(state = defaultState, action){
@@ -11,6 +12,9 @@ function reducer(state = defaultState, action){
 
         case "SET_COVID_PATIENTS":
             return {...state, covidPatients: action.covidPatients}
+
+        case "SET_CURRENT_COVID_PATIENT_ID":
+            return {...state, currentCovidPatientId: action.currentCovidPatientId}
       
         default:
             return state

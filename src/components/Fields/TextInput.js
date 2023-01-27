@@ -11,7 +11,7 @@ export default function Text({ label, ...props }) {
     <div className="pretty-text">
       <div className="quantity">
         <label>{label} : </label>
-        <Input type={props.type} className="input" touched {...validation}  {...props} />
+        <Input value={props.value} type={props.type} className="input" touched {...validation}  {...props} />
       </div>
       <p className="required">{status.error}</p>
     </div>

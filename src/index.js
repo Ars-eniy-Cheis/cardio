@@ -31,7 +31,7 @@ const router = (
         <Route path="/login" element={mainPage} />
         <Route path="/profile" element={profile} />
         <Route path="/profile/covid" element={covid} />
-        <Route path="/profile/covid/new-patient" element={covidNewPatient} />
+        <Route path="/profile/covid/patient" element={covidNewPatient} />
         <Route path="*" element={mainPage} />
       </Routes>
     </Router>

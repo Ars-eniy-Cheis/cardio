@@ -13,7 +13,6 @@ import WizardFormThirdPage from '../../components/CovidPatientWizard/ThirdPage/W
 import './CovidPatient.css';
 
 function CovidNewPatient(props) {
-    //const {props: {wizard, prevPage}};
     const wizard = props.wizard
     const nextPage = props.nextPage
     const prevPage = props.prevPage
@@ -26,22 +25,28 @@ function CovidNewPatient(props) {
                 <Breadcrumb className="breadcrumb">
                     <Breadcrumb.Item className="breadcrumb" href="/profile">Выбор сервиса</Breadcrumb.Item>
                     <Breadcrumb.Item className="breadcrumb" href="/profile/covid">COVID</Breadcrumb.Item>
-                    <Breadcrumb.Item className="breadcrumb" active>Новый пациент</Breadcrumb.Item>
+                    <Breadcrumb.Item className="breadcrumb" active>{props.breadcrumbPath}</Breadcrumb.Item>
                 </Breadcrumb>
 
-                <div className="pretty-text"> &nbsp;&nbsp;&nbsp;&nbsp; Новый Пациент </div>
+                <div className="pretty-text"> &nbsp;&nbsp;&nbsp;&nbsp; {props.breadcrumbPath} </div>
 
             </div>
             <div >
                 <Container >
                     {props.currentPage === 1 && (
-                        <WizardFormFirstPage {...wizard} onSubmit={nextPage} name="form1" />
+                        <WizardFormFirstPage 
+                        {...wizard} 
+                        onSubmit={nextPage} 
+                        currentPatient={props.currentPatient} 
+                        name="form1" 
+                        />
                     )}
                     {props.currentPage === 2 && (
                         <WizardFormSecondPage
                             {...wizard}
                             prevPage={prevPage}
                             onSubmit={nextPage}
+                            currentPatient={props.currentPatient}
                             name="form2"
                         />
                     )}
@@ -50,6 +55,7 @@ function CovidNewPatient(props) {
                             {...wizard}
                             prevPage={prevPage}
                             onSubmit={onSubmitWizard}
+                            currentPatient={props.currentPatient}
                             name="form3"
                         />
                     )}

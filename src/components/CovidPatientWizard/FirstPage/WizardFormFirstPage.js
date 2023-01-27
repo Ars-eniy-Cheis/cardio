@@ -11,12 +11,19 @@ import "../../Containers/Container.css"
 
 function WizardFormFirstPage(props) {
 
-  return (
+  let selected
+  if(props.currentPatient != "")
+    selected = props.currentPatient
+  else
+    selected = ""
 
+  return (
+//props.currentPatient.sex
+//props.currentPatient.age
     <div className="form-container">
       <Form {...props}>
-        <DoubleSelection title={"Пол "} first={"Мужской "} second={"Женский "} name={"sex"} value1={"M"} value2={"F"} />
-        <TextInput type={"text"} label="Возраст" name="age" />
+        <DoubleSelection title={"Пол "} first={"Мужской "} second={"Женский "} name={"sex"} value1={"M"} value2={"F"} selected={selected.sex} />
+        <TextInput type={"text"} label="Возраст" name="age" value={selected.age} />
         <div className="field is-grouped">
           <div className="control">
             <Button type="submit" className="right-button-in-form">

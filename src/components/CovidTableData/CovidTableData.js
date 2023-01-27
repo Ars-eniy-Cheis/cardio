@@ -3,6 +3,7 @@ import {React} from "react"
 import "./CovidTableData.css"
 
 function CovidTableData(props) {
+
   return(
     <tr className="table-light">
       <td>{props.id}</td>
