@@ -22,7 +22,7 @@ function WizardFormSecondPage({ prevPage, ...props }) {
       <Form {...props}>
         <Container>
           <Row>
-            <Col>
+            <Col xs={5}>
               <TextInput value={selected.urea} type={"text"} label="Мочевина" name="urea" />
               <TextInput value={selected.creatinine} type={"text"} label="Креатини" name="creatinine" />
               <TextInput value={selected.ast} type={"text"} label="АСТ" name="AST" />
@@ -30,7 +30,7 @@ function WizardFormSecondPage({ prevPage, ...props }) {
             </Col>
             <Col>
             </Col>
-            <Col>
+            <Col xs={5}>
               <TextInput value={selected.glucose} type={"text"} label="Глюкоза" name="glucose" />
               <TextInput value={selected.leukocytes} type={"text"} label="Лейкоциты" name="leukocytes" />
               <TextInput value={selected.platelets} type={"text"} label="Тромбоциты" name="platelets" />

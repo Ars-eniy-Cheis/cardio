@@ -8,41 +8,56 @@ import Token from '../../model/dataClasses/Token'
 
 import { withRouter } from '../../model/withRouter';
 
-import {wizardStateToPatientJSON} from '../../model/utils'
+import { wizardStateToPatientJSON } from '../../model/utils'
 
-import CovidPatient from './CovidPatient'
+import CabsPatient from './CabsPatient'
 
 
 
-function CovidPatientComponent(props) {
+function CabsPatientComponent(props) {
 
     const dispatch = useDispatch()
-    const currentCovidPatientIdState = useSelector(state => state.currentCovidPatientId)
+    const currentCabsPatientIdState = useSelector(state => state.currentCabsPatientId)
 
-    const setCurrentCovidPatientId = (idValue) => {
-        dispatch({ type: "SET_CURRENT_COVID_PATIENT_ID", currentCovidPatientId: idValue })
+    const setCurrentCabsPatientId = (idValue) => {
+        dispatch({ type: "SET_CURRENT_CABS_PATIENT_ID", currentCabsPatientId: idValue })
     }
 
-    const covidPatientsState = useSelector(state => state.covidPatients)
+    const cabsPatientsState = useSelector(state => state.cabsPatients)
     const setPatientsState = (patientsValue) => {
-        dispatch({ type: "SET_COVID_PATIENTS", covidPatients: patientsValue })
+        dispatch({ type: "SET_CABS_PATIENTS", cabsPatients: patientsValue })
     }
 
-    const setCovidDeathProbability = (covidDeathProbabilityValue) => {
-        dispatch({ type: "SET_COVID_DEATH_PROBABILITY", covidDeathProbability: covidDeathProbabilityValue })
+    const setCabsHeartAttack = (cabsHeartAttackValue) => {
+        dispatch({ type: "SET_CABS_HEART_ATTACK", cabsHeartAttack: cabsHeartAttackValue })
+    }
+
+    const setCabsPCI = (cabsPCIValue) => {
+        dispatch({ type: "SET_CABS_PCI", cabsPCI: cabsPCIValue })
+    }
+
+    const setCabsInsult = (cabsInsultValue) => {
+        dispatch({ type: "SET_CABS_INSULT", cabsInsult: cabsInsultValue })
+    }
+
+    const setCabsDeath = (cabsDeathValue) => {
+        dispatch({ type: "SET_CABS_DEATH", cabsDeath: cabsDeathValue })
     }
 
     let currentPatient
-    if (covidPatientsState[currentCovidPatientIdState] != undefined)
-        currentPatient = covidPatientsState[currentCovidPatientIdState]
+    if (cabsPatientsState[currentCabsPatientIdState] != undefined)
+        currentPatient = cabsPatientsState[currentCabsPatientIdState]
     else
         currentPatient = ""
 
     let breadcrumbPath;
-    if (currentCovidPatientIdState === -1)
+    if (currentCabsPatientIdState === -1)
         breadcrumbPath = "Новый пациент"
     else {
-        setCovidDeathProbability(currentPatient.probabilityOfDeath + "%")
+        setCabsHeartAttack(currentPatient.heartAttack ? "Да" : "Нет")
+        setCabsPCI(currentPatient.PCI ? "Да" : "Нет")
+        setCabsInsult(currentPatient.insult ? "Да" : "Нет")
+        setCabsDeath(currentPatient.death ? "Да" : "Нет")
         breadcrumbPath = "Изменить"
     }
 
@@ -66,7 +81,10 @@ function CovidPatientComponent(props) {
             let patientAnswer = patient.addPatient(localStorage.getItem('accessToken'), patientJSON)
             let addedPatient = new Patient(patientAnswer)
             if (patient.status >= 200 && patient.status < 300) {
-                setCovidDeathProbability(addedPatient.probabilityOfDeath + "% ")
+                setCabsHeartAttack(addedPatient.heartAttack ? "Да" : "Нет")
+                setCabsPCI(addedPatient.PCI ? "Да" : "Нет")
+                setCabsInsult(addedPatient.insult ? "Да" : "Нет")
+                setCabsDeath(addedPatient.death ? "Да" : "Нет")
             }
             else {
                 let token = new Token()
@@ -83,10 +101,13 @@ function CovidPatientComponent(props) {
         else {
             let patient = new Patient({})
             patientJSON = await wizardStateToPatientJSON(getWizardState())
-            let patientAnswer = patient.patchPatient(localStorage.getItem('accessToken'), currentCovidPatientIdState, patientJSON)
+            let patientAnswer = patient.patchPatient(localStorage.getItem('accessToken'), currentCabsPatientIdState, patientJSON)
             let addedPatient = new Patient(patientAnswer)
             if (patient.status >= 200 && patient.status < 300) {
-                setCovidDeathProbability(addedPatient.probabilityOfDeath + "% ")
+                setCabsHeartAttack(addedPatient.heartAttack ? "Да" : "Нет")
+                setCabsPCI(addedPatient.PCI ? "Да" : "Нет")
+                setCabsInsult(addedPatient.insult ? "Да" : "Нет")
+                setCabsDeath(addedPatient.death ? "Да" : "Нет")
             }
             else {
                 let token = new Token()
@@ -104,7 +125,7 @@ function CovidPatientComponent(props) {
     };
 
     return (
-        <CovidPatient
+        <CabsPatient
             currentPatient={currentPatient}
             breadcrumbPath={breadcrumbPath}
             wizard={wizard}
@@ -117,4 +138,4 @@ function CovidPatientComponent(props) {
 
 }
 
-export default withRouter(CovidPatientComponent)
+export default withRouter(CabsPatientComponent)

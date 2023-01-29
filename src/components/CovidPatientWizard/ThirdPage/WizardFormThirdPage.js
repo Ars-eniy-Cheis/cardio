@@ -19,11 +19,11 @@ function WizardFormSecondPage({ prevPage, ...props }) {
 
   let selected
   let submit
-  if (props.currentPatient != ""){
+  if (props.currentPatient != "") {
     selected = props.currentPatient
     submit = "Применить"
   }
-  else{
+  else {
     submit = "Расчитать результат"
     selected = ""
   }
@@ -32,7 +32,7 @@ function WizardFormSecondPage({ prevPage, ...props }) {
       <Form {...props}>
         <Container>
           <Row>
-            <Col>
+            <Col xs={5}>
               <TextInput value={selected.dDimer} type={"text"} label="D-димер, ед." name="d-dimer" />
               <DoubleSelection selected={selected.ag} title={"АГ "} first={"Есть "} second={"Нет "} name={"AG"} value1={"true"} value2={"false"} />
               <DoubleSelection selected={selected.sd} title={"СД "} first={"Есть "} second={"Нет "} name={"SD"} value1={"true"} value2={"false"} />
@@ -42,7 +42,7 @@ function WizardFormSecondPage({ prevPage, ...props }) {
             </Col>
             <Col>
             </Col>
-            <Col>
+            <Col xs={5}>
               <TextInput value={selected.crp} type={"text"} label="CRP " name="CRP" />
               <TextInput value={selected.skf} type={"text"} label="СКФ (CKD-EPI 2021)" name="SKF" />
               <TextInput value={selected.neutrophilLymphocyteRatio} type={"text"} label="Нейтрофильно-лимфоцитарное состояние" name="Neutrophil-lymphocyteRatio" />
@@ -60,7 +60,7 @@ function WizardFormSecondPage({ prevPage, ...props }) {
             <Button type="button" className="left-button-in-form" onClick={prevPage}>
               Назад
             </Button>
-            <Reset /> 
+            <Reset />
             <br />
             <br />
           </div>

@@ -1,0 +1,10 @@
+tablebutton { 
+    text-decoration:underline; 
+    color:blue;
+    transition: all .1s linear;
+  
+  }
+  
+  tablebutton:hover {
+    color: #a58bdd;
+  }
