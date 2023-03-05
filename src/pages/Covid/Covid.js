@@ -27,7 +27,7 @@ function Covid(props) {
                             <tr className="table-light">
                                 <th>ID</th>
                                 <th>Дата поступления</th>
-                                <th>Вероятность летального исхода</th>
+                                <th>Летальный исход</th>
                                 <th> </th>
                                 <th> </th>
                             </tr>

@@ -49,7 +49,7 @@ function WizardFormSecondPage({ prevPage, ...props }) {
               <br />
               <br />
               <div className="pretty-text">
-                Вероятность летального исхода: {covidDeathProbability}
+                Летальный исход: {covidDeathProbability}
               </div>
               <Submit type="submit">Расчитать результат</Submit>
             </Col>

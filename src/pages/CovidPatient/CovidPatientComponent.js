@@ -42,7 +42,7 @@ function CovidPatientComponent(props) {
     if (currentCovidPatientIdState === -1)
         breadcrumbPath = "Новый пациент"
     else {
-        setCovidDeathProbability(currentPatient.probabilityOfDeath + "%")
+        setCovidDeathProbability(currentPatient.probabilityOfDeath ? "Да" : "Нет")
         breadcrumbPath = "Изменить"
     }
 
@@ -66,7 +66,7 @@ function CovidPatientComponent(props) {
             let patientAnswer = patient.addPatient(localStorage.getItem('accessToken'), patientJSON)
             let addedPatient = new Patient(patientAnswer)
             if (patient.status >= 200 && patient.status < 300) {
-                setCovidDeathProbability(addedPatient.probabilityOfDeath + "% ")
+                setCovidDeathProbability(addedPatient.probabilityOfDeath  ? "Да" : "Нет")
             }
             else {
                 let token = new Token()
@@ -86,7 +86,7 @@ function CovidPatientComponent(props) {
             let patientAnswer = patient.patchPatient(localStorage.getItem('accessToken'), currentCovidPatientIdState, patientJSON)
             let addedPatient = new Patient(patientAnswer)
             if (patient.status >= 200 && patient.status < 300) {
-                setCovidDeathProbability(addedPatient.probabilityOfDeath + "% ")
+                setCovidDeathProbability(addedPatient.probabilityOfDeath ? "Да" : "Нет")
             }
             else {
                 let token = new Token()

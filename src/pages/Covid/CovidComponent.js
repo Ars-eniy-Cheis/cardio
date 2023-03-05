@@ -92,7 +92,7 @@ function CovidComponent(props) {
           arrayId={i}
           id={item.id}
           dateOfAdmission={item.dateOfAdmission}
-          probabilityOfDeath={item.probabilityOfDeath}
+          probabilityOfDeath={item.probabilityOfDeath ? "Да" : "Нет"}
           handleChange={handleChange}
           handleDelete={handleDelete}
         />

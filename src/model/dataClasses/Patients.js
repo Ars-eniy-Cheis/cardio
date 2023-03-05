@@ -21,7 +21,7 @@ class Patients {
             {
                 id: 8,
                 dateOfAdmission: 1672954315,
-                probabilityOfDeath: 10,
+                probabilityOfDeath: true,
                 sex: true,
                 age: 45,
                 urea: 234,
@@ -108,7 +108,7 @@ class Patients {
             {
                 id: 2,
                 dateOfAdmission: 1672955825,
-                probabilityOfDeath: 25,
+                probabilityOfDeath: true,
                 sex: true,
                 age: 45,
                 urea: 234,
@@ -194,7 +194,7 @@ class Patients {
             {
                 id: 12,
                 dateOfAdmission: 1672954356,
-                probabilityOfDeath: 30,
+                probabilityOfDeath: false,
                 sex: false,
                 age: 45,
                 urea: 234,
@@ -275,7 +275,7 @@ class Patients {
                 heartAttack:  false,
                 PCI: true,
                 insult:  false,
-                death: true
+                death: false
             }
         ]
 
