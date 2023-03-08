@@ -8,23 +8,23 @@ import reportWebVitals from './reportWebVitals';
 
 import reducer from './store/reducers/mainReducer'
 
-import LoginComponent from './pages/Login/LoginComponent';
-import ChooseServiceComponent from './pages/ChooseService/ChooseServiceComponent';
-import CovidComponent from './pages/Covid/CovidComponent';
-import CovidPatientComponent from './pages/CovidPatient/CovidPatientComponent';
-import CabsComponent from './pages/Cabs/CabsComponent';
-import CabsPatientComponent from './pages/CabsPatient/CabsPatientComponent';
+import Login from './pages/Login';
+import ChooseService from './pages/ChooseService';
+import Covid from './pages/Covid';
+import CovidPatient from './pages/CovidPatient';
+import Cabs from './pages/Cabs';
+import CabsPatient from './pages/CabsPatient';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const store = createStore(reducer);
 
-const mainPage = (<LoginComponent />);
-const profile = (<ChooseServiceComponent />);
-const covid = (<CovidComponent />);
-const covidPatient = (<CovidPatientComponent />);
-const cabs = (<CabsComponent />);
-const cabsPatient = (<CabsPatientComponent />);
+const mainPage = (<Login />);
+const profile = (<ChooseService />);
+const covid = (<Covid />);
+const covidPatient = (<CovidPatient />);
+const cabs = (<Cabs />);
+const cabsPatient = (<CabsPatient />);
 
 const router = (
   <Provider store={store}>
