@@ -14,6 +14,7 @@ import Covid from './pages/Covid';
 import CovidPatient from './pages/CovidPatient';
 import Cabs from './pages/Cabs';
 import CabsPatient from './pages/CabsPatient';
+import Admin from './pages/Admin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -25,6 +26,7 @@ const covid = (<Covid />);
 const covidPatient = (<CovidPatient />);
 const cabs = (<Cabs />);
 const cabsPatient = (<CabsPatient />);
+const admin = (<Admin />);
 
 const router = (
   <Provider store={store}>
@@ -37,6 +39,7 @@ const router = (
         <Route path="/profile/covid/patient" element={covidPatient} />
         <Route path="/profile/cabs" element={cabs} />
         <Route path="/profile/cabs/patient" element={cabsPatient} />
+        <Route path="/admin" element={admin} />
         <Route path="*" element={mainPage} />
       </Routes>
     </Router>
