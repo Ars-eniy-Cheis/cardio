@@ -11,6 +11,8 @@ function Admin(props) {
             data={props.data}
             updateData={props.updateData}
             skipPageReset={props.skipPageReset}
+            onDelete={props.onDelete}
+            onSave={props.onSave}
         />
     )
 }

@@ -7,6 +7,8 @@ import { withRouter } from '../../utils/withRouter';
 
 import Users from "../../model/dataClasses/Users";
 
+import "../../styles/test.css"
+
 function AdminComponent(props) {
 
     const columns = useMemo(
@@ -65,13 +67,17 @@ function AdminComponent(props) {
         )
     }
 
+    const onDelete = () => {
+
+    }
+
+    const onSave = () => {
+
+    }
+
     useEffect(() => {
         setSkipPageReset(false)
     }, [data])
-
-    // Let's add a data resetter/randomizer to help
-    // illustrate that flow...
-    //const resetData = () => setData(originalData)
 
     return (
         <Admin
@@ -79,6 +85,8 @@ function AdminComponent(props) {
             data={data}
             updateData={updateData}
             skipPageReset={skipPageReset}
+            onDelete={onDelete}
+            onSave={onSave}
         />
     )
 }
