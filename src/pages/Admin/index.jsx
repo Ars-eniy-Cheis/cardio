@@ -22,8 +22,16 @@ function AdminComponent(props) {
                 accessor: 'registrationDate',
             },
             {
-                Header: 'ФИО',
-                accessor: 'fullName',
+                Header: 'Фамилия',
+                accessor: 'surname',
+            },
+            {
+                Header: 'Имя',
+                accessor: 'name',
+            },
+            {
+                Header: 'Отчество',
+                accessor: 'fathersName',
             },
             {
                 Header: 'Логин',
@@ -32,14 +40,6 @@ function AdminComponent(props) {
             {
                 Header: 'Роль',
                 accessor: 'role',
-            },
-            {
-                Header: 'Удалён',
-                accessor: 'deletionStatus',
-            },
-            {
-                Header: 'Дата удаления',
-                accessor: 'deletionDate',
             },
         ],
         []
@@ -52,7 +52,6 @@ function AdminComponent(props) {
     const [skipPageReset, setSkipPageReset] = useState(false)
 
     const updateData = (rowIndex, columnId, value) => {
-        console.log("value: " + value);
         setSkipPageReset(true)
         setData(old =>
             old.map((row, index) => {

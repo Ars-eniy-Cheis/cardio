@@ -17,29 +17,29 @@ class Users {
             {
                 id: 1,
                 registrationDate: 1678891010,
-                fullName: "Калинько А.Е.",
+                surname:"Калинько",
+                name: "Арсений",
+                fathersName: "Евгеньевич",
                 login: "Arseniy",
-                role: "admin",
-                deletionStatus: true,
-                deletionDate: 0
+                role: "admin"
             },
             {
                 id: 2,
                 registrationDate: 1678977410,
-                fullName: "Шванев А.А.",
+                surname:"Шванев",
+                name: "Арсений",
+                fathersName: "Алексеевич",
                 login: "doctor",
-                role: "user",
-                deletionStatus: true,
-                deletionDate: 0
+                role: "user"
             },
             {
                 id: 3,
                 registrationDate: 1679063810,
-                fullName: "Бауэр Р.Е.",
+                surname:"Бауэр",
+                name: "Рудольф",
+                fathersName: "Евгеньевич",
                 login: "rudenf",
-                role: "user",
-                deletionStatus: false,
-                deletionDate: 1679150210
+                role: "user"
             },
         ]
 

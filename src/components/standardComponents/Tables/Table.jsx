@@ -34,17 +34,11 @@ const EditableCell = ({
     if (id === "id") {
         return value
     }
-    else if (id === "registrationDate" || id === "deletionDate") {
+    else if (id === "registrationDate") {
         if (value !== 0) {
             return new Date(value * 1000).toLocaleDateString("en-GB")
         }
         return ""
-    }
-    else if (id === "deletionStatus") {
-        if (value) {
-            return "Нет"
-        }
-        return "Да"
     }
     else if (id === "role") {
         let tabRoles = structuredClone(roles)
@@ -141,52 +135,7 @@ function Table({ columns, data, updateData, skipPageReset, onDelete, onSave }) {
                     })}
                 </tbody>
             </table>
-            <div className="pagination">
-                <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-                    {'<<'}
-                </button>{' '}
-                <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-                    {'<'}
-                </button>{' '}
-                <button onClick={() => nextPage()} disabled={!canNextPage}>
-                    {'>'}
-                </button>{' '}
-                <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-                    {'>>'}
-                </button>{' '}
-                <span>
-                    Page{' '}
-                    <strong>
-                        {pageIndex + 1} of {pageOptions.length}
-                    </strong>{' '}
-                </span>
-                <span>
-                    | Go to page:{' '}
-                    <input
-                        type="number"
-                        defaultValue={pageIndex + 1}
-                        onChange={e => {
-                            if (e.target.value > 0) {
-                                const page = e.target.value ? Number(e.target.value) - 1 : 0
-                                gotoPage(page)
-                            }
-                        }}
-                        style={{ width: '100px' }}
-                    />
-                </span>{' '}
-                <select
-                    value={pageSize}
-                    onChange={e => {
-                        setPageSize(Number(e.target.value))
-                    }}
-                >
-                    {[10, 20, 30, 40, 50].map(pageSize => (
-                        <option key={pageSize} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            
         </>
     )
 }

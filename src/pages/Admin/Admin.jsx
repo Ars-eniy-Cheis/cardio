@@ -6,14 +6,19 @@ import Table from "../../components/standardComponents/Tables/Table"
 
 function Admin(props) {
     return (
-        <Table
-            columns={props.columns}
-            data={props.data}
-            updateData={props.updateData}
-            skipPageReset={props.skipPageReset}
-            onDelete={props.onDelete}
-            onSave={props.onSave}
-        />
+        <>
+            <Table
+                columns={props.columns}
+                data={props.data}
+                updateData={props.updateData}
+                skipPageReset={props.skipPageReset}
+                onDelete={props.onDelete}
+                onSave={props.onSave}
+            />
+            <button className="standard-button">
+                Добавить пользователя
+            </button>
+        </>
     )
 }
 

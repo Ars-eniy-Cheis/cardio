@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    font-size: 16px;
+   
 }
 
 /* Стиль для заголовка */
@@ -19,175 +20,127 @@ h1 {
     width: 100%;
 }
 
-/*
- Стиль для таблицы 
-table {
-    border-collapse: collapse;
-    margin: 40px auto;
-    width: 80%;
-    max-width: 1200px;
-    background-color: #ffffff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
- Стиль для заголовка таблицы 
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    padding: 10px;
-    text-align: center;
-}
-*/
-
-/* 
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-table th,
-table td {
-    padding: 8px;
-    text-align: left;
-    vertical-align: middle;
-    border: 1px solid #ccc;
-}
-
-table th {
-    font-weight: bold;
-    background-color: #f2f2f2;
-}
-
-button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-button:hover {
-    background-color: #3e8e41;
-}
-*/
-
-/* Оформление таблицы 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    font-size: 16px;
-    line-height: 1.5;
-    background-color: #fff;
-    color: #333;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-}
-
-table th,
-table td {
-    padding: 12px;
-    text-align: left;
-    vertical-align: middle;
-    border: 1px solid #ccc;
-}
-
-table th {
-    font-weight: bold;
-    background-color: #f1f1f1;
-}
-
-table td {
-    background-color: #fff;
-}
-
-table tbody tr:nth-child(odd) td {
-    background-color: #f9f9f9;
-}
-
-/* Оформление кнопок 
-button {
-    display: inline-block;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 4px;
-    transition: background-color 0.2s ease-in-out;
-}
-
-button:hover {
-    background-color: #0062cc;
-}
- */
-
 /* Стили для таблицы */
 table {
     border-collapse: collapse;
+    border: 1px solid #eee;
     width: 100%;
+    margin: 20px 0px 20px;
+
 }
 
 th,
 td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 th {
     background-color: #f2f2f2;
-    color: #333;
 }
 
-/* Стили для кнопок */
-button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
+tr:nth-child(odd) {
+
+    background-color: #fff;
+
 }
 
-button:hover {
-    background-color: #3e8e41;
+tr:nth-child(even) {
+
+    background-color: #F7F7F7;
+
 }
 
-/* Стили для формы */
-form {
-    margin: 20px;
+tr:hover {
+    background-color: #cfcece;
 }
 
-label {
-    display: block;
+.pagination {
+    padding: 0.5rem;
+}
+
+/* Стили для формы редактирования */
+.form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form input {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.form label {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
-input[type=text],
-select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
+/*
+table select {
+    /* Общие стили для всех элементов <select> в таблице 
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    padding: 6px 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
+    background-color: #fff;
 }
+
+table select:focus {
+    /* Стиль элемента <select> при получении фокуса 
+
+}
+
+table select:hover {
+    /* Стиль элемента <select> при наведении курсора мыши 
+    border-color: #999;
+}
+
+table select option {
+    /* Стиль элемента <option> внутри элемента <select> 
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+}
+*/
+
+select {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  select:focus {
+    border-color: #0077cc;
+    box-shadow: 0 0 5px rgba(0, 119, 204, 0.5);
+  }
+  
+  select:hover {
+    border-color: #999;
+  }
+  
+  /* Стиль для элементов <button> */
+  .standard-button {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0077cc;
+    cursor: pointer;
+  }
+  
+  .standard-button:hover {
+    background-color: #005fa3;
+  }

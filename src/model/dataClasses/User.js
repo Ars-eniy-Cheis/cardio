@@ -9,11 +9,11 @@ class User {
 
         this.id = object.id;
         this.registrationDate = object.registrationDate;
-        this.fullName = object.fullName;
+        this.surname = object.surname;
+        this.name = object.name;
+        this.fathersName = object.fathersName;
         this.login = object.login;
         this.role = object.role;
-        this.deletionStatus = object.deletionStatus;
-        this.deletionDate = object.deletionDate;
 
     }
 
