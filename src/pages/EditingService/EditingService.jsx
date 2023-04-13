@@ -5,16 +5,14 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Table from "../../components/standardComponents/Tables/Table"
 
 import "../../styles/test.css"
-import '../../styles/pages/Covid.css';
-import "../../styles/components/customComponents/CabsTableData.css"
 
-function Covid(props) {
+function EditingService(props) {
     return (
         <>
             <div>
                 <Breadcrumb className="breadcrumb">
                     <Breadcrumb.Item className="breadcrumb" href="/profile">Выбор сервиса</Breadcrumb.Item>
-                    <Breadcrumb.Item className="breadcrumb" active>COVID</Breadcrumb.Item>
+                    <Breadcrumb.Item className="breadcrumb" active>Прогноз по шунтированию</Breadcrumb.Item>
                 </Breadcrumb>
                 <Button variant="primary" className="cabsButton" onClick={props.handleExit}>
                     Выйти
@@ -31,5 +29,4 @@ function Covid(props) {
     )
 }
 
-export default Covid
-
+export default EditingService

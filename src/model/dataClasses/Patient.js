@@ -1,5 +1,6 @@
 import Request from "../Request"
 
+import { patientsAnswer } from "./fakeAnswers";
 
 class Patient {
 //
@@ -124,6 +125,7 @@ id, dateOfAdmission, probabilityOfDeath,
         //this.status = await this.answer.status
         //let patient = await this.answer.json()
         //return patient
+        return patientsAnswer.find(item => item.id === patientID)
     }
 
     async deletePatient(accessToken, patientID){

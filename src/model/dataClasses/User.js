@@ -1,5 +1,6 @@
 import Request from "../Request"
 
+import { usersAnswer } from "./fakeAnswers";
 
 class User {
     constructor(object) {
@@ -30,6 +31,7 @@ class User {
         //this.status = await this.answer.status
         //let user = await this.answer.json()
         //return user
+        return usersAnswer.find(item => item.id === userID)
     }
 
     async deleteUser(accessToken, userID) {

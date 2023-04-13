@@ -7,9 +7,9 @@ import { handleExit, handleAddNew, handleChange, handleDeletePatient, handleGetP
 
 import { cabsPatientsHeader } from "../../config/tableHeaders";
 
-import Cabs from "./Cabs";
+import EditingService from "./EditingService";
 
-function CabsComponent(props) {
+function EditingServiceComponent(props) {
 
   const dispatch = useDispatch()
   const cabsPatientsState = useSelector(state => state.cabsPatients)
@@ -54,7 +54,7 @@ for(let i = 0; i < cabsPatientsState.length; i++){
     }, [])
 
   return (
-    <Cabs
+    <EditingService
     columns={columns}
             data={cabsPatientsState}
             skipPageReset={skipPageReset}

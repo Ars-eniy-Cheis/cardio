@@ -1,67 +1,18 @@
-import { React, useEffect, useState, useRef, useMemo } from "react"
+import { React } from "react"
 
 import { useTable, useSortBy, usePagination } from 'react-table'
 
-import { roles } from "../../../config"
+import UserEditableCell from "../Cells/UserEditableCell"
+import PatientEditableCell from "../Cells/PatientEditableCell"
 
 //import "../../../styles/components/standardComponents/tables/table.css"
 
-const EditableCell = ({
-    value: initialValue,
-    row: { index },
-    column: { id },
-    updateData,
-}) => {
-    const [value, setValue] = useState(initialValue)
-
-    const onChange = e => {
-        setValue(e.target.value)
-    }
-
-    const selectOnChange = e => {
-        setValue(e.target.value)
-        updateData(index, id, e.target.value)
-    }
-
-    const onBlur = () => {
-        updateData(index, id, value)
-    }
-
-    useEffect(() => {
-        setValue(initialValue)
-    }, [initialValue])
-
-    if (id === "id") {
-        return value
-    }
-    else if (id === "registrationDate") {
-        if (value !== 0) {
-            return new Date(value * 1000).toLocaleDateString("en-GB")
-        }
-        return ""
-    }
-    else if (id === "role") {
-        let tabRoles = structuredClone(roles)
-        tabRoles.delete(value)
-        let options = [<option value={value}>{value}</option>]
-
-        for (let i of tabRoles) {
-            options.push(
-                <option value={i}>{i}</option>
-            )
-        }
-        return (<select value="role" onChange={selectOnChange} >
-            {options}
-        </select>)
-    }
-    return <input className="table-input" value={value} onChange={onChange} onBlur={onBlur} />
-}
-
 const defaultColumn = {
-    Cell: EditableCell,
+    //Cell: UserEditableCell,
+    Cell: PatientEditableCell
 }
 
-function Table({ columns, data, updateData, skipPageReset, onDelete, onSave }) {
+function Table({ columns, data, skipPageReset, additionalTableComponents }) {
 
     const {
         getTableProps,
@@ -84,7 +35,6 @@ function Table({ columns, data, updateData, skipPageReset, onDelete, onSave }) {
             data,
             defaultColumn,
             autoResetPage: !skipPageReset,
-            updateData,
         },
         useSortBy,
         usePagination
@@ -124,12 +74,7 @@ function Table({ columns, data, updateData, skipPageReset, onDelete, onSave }) {
                                 {row.cells.map(cell => {
                                     return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                                 })}
-                                <td>
-                                    <button onClick={() => { }}> <tablebutton>Удалить</tablebutton> </button>
-                                </td>
-                                <td>
-                                    <button onClick={() => { }}> <tablebutton>Сохранить</tablebutton> </button>
-                                </td>
+                                {additionalTableComponents[i]}
                             </tr>
                         )
                     })}
