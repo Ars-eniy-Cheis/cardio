@@ -13,6 +13,7 @@
     "react-admin": "^4.7.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
+    "react-minimal-side-navigation": "^1.9.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
     "react-router-redux": "^5.0.0-alpha.9",

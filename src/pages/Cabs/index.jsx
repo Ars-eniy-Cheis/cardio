@@ -22,6 +22,11 @@ function CabsComponent(props) {
     dispatch({ type: "SET_CURRENT_CABS_PATIENT_ID", currentCabsPatientId: idValue })
   }
 
+  const columns = useMemo(
+    () => cabsPatientsHeader,
+    []
+  )
+
   const additionalTableComponents = [];
 for(let i = 0; i < cabsPatientsState.length; i++){
   additionalTableComponents.push
@@ -37,12 +42,7 @@ for(let i = 0; i < cabsPatientsState.length; i++){
   )
 }
 
-    const [skipPageReset, setSkipPageReset] = useState(false)
-
-    const columns = useMemo(
-      () => cabsPatientsHeader,
-      []
-    )
+  const [skipPageReset, setSkipPageReset] = useState(false)
 
     const didMount = useRef(false);
     useEffect(() => {
@@ -55,10 +55,10 @@ for(let i = 0; i < cabsPatientsState.length; i++){
 
   return (
     <Cabs
-    columns={columns}
-            data={cabsPatientsState}
-            skipPageReset={skipPageReset}
-            additionalTableComponents={additionalTableComponents}
+      columns={columns}
+      data={cabsPatientsState}
+      skipPageReset={skipPageReset}
+      additionalTableComponents={additionalTableComponents}
       handleExit={() => {handleExit(props.navigate)}}
       handleNewPatient={() => { handleAddNew(props.navigate, '/profile/cabs/patient')}}
     />

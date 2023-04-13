@@ -1,6 +1,8 @@
 import Token from '../../model/dataClasses/Token'
 import Patient from '../../model/dataClasses/Patient'
 import Patients from '../../model/dataClasses/Patients'
+import User from '../dataClasses/User'
+import Users from '../dataClasses/Users'
 
 async function handleExit (navigate) {
     localStorage.removeItem('accessToken')
@@ -48,4 +50,33 @@ async function handleDeletePatient (navigate, state, stateChanger, id) {
     }
 }
 
-export { handleExit, handleGetPatients, handleAddNew, handleChange, handleDeletePatient }
+async function handleGetUsers (stateChanger) {
+    let usersData = new Users()
+    await usersData.getUsers(localStorage.getItem('accessToken'))
+    stateChanger(usersData.users)
+}
+
+async function handleDeleteUser (navigate, state, stateChanger, id) {
+    let user = new User({})
+
+    await user.deleteUser(localStorage.getItem('accessToken'), id)
+
+    if (user.status >= 200 && user.status < 300) {
+      let newUsersState = state.filter(user => user.id !== id)
+      stateChanger(newUsersState)
+    }
+    else{
+      let token = new Token()
+      let updatedToken = await token.updateToken(localStorage.getItem('refreshToken'))
+      if (token.status >= 200 && token.status < 300) {
+        localStorage.setItem('accessToken', updatedToken.accessToken)
+        localStorage.setItem('refreshToken', updatedToken.refreshToken)
+        handleDeleteUser (navigate, state, stateChanger, id)
+      }
+      else{
+        handleExit(navigate)
+      }
+    }
+}
+
+export { handleExit, handleGetPatients, handleAddNew, handleChange, handleDeletePatient, handleGetUsers, handleDeleteUser }

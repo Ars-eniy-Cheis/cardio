@@ -40,4 +40,35 @@ const covidPatientsHeader = [
     },
 ]
 
-export { cabsPatientsHeader, covidPatientsHeader }
+const usersHeader = [
+    {
+        Header: 'ID',
+        accessor: 'id',
+    },
+    {
+        Header: 'Дата регистрации',
+        accessor: 'registrationDate',
+    },
+    {
+        Header: 'Фамилия',
+        accessor: 'surname',
+    },
+    {
+        Header: 'Имя',
+        accessor: 'name',
+    },
+    {
+        Header: 'Отчество',
+        accessor: 'fathersName',
+    },
+    {
+        Header: 'Логин',
+        accessor: 'login',
+    },
+    {
+        Header: 'Роль',
+        accessor: 'role',
+    },
+]
+
+export { cabsPatientsHeader, covidPatientsHeader, usersHeader }

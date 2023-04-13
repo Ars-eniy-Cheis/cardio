@@ -11,19 +11,6 @@ const PatientEditableCell = ({
 }) => {
     const [value, setValue] = useState(initialValue)
 
-    const onChange = e => {
-        setValue(e.target.value)
-    }
-
-    const selectOnChange = e => {
-        setValue(e.target.value)
-        updateData(index, id, e.target.value)
-    }
-
-    const onBlur = () => {
-        updateData(index, id, value)
-    }
-
     useEffect(() => {
         setValue(initialValue)
     }, [initialValue])
@@ -40,4 +27,8 @@ const PatientEditableCell = ({
     return value
 }
 
-export default PatientEditableCell
+const PatientColumn = {
+    Cell: PatientEditableCell
+}
+
+export { PatientEditableCell, PatientColumn }

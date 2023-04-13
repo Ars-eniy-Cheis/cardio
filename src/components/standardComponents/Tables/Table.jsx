@@ -2,17 +2,12 @@ import { React } from "react"
 
 import { useTable, useSortBy, usePagination } from 'react-table'
 
-import UserEditableCell from "../Cells/UserEditableCell"
-import PatientEditableCell from "../Cells/PatientEditableCell"
+import {UserEditableCell} from "../Cells/UserEditableCell"
 
 //import "../../../styles/components/standardComponents/tables/table.css"
 
-const defaultColumn = {
-    //Cell: UserEditableCell,
-    Cell: PatientEditableCell
-}
 
-function Table({ columns, data, skipPageReset, additionalTableComponents }) {
+function Table({ columns, data, skipPageReset, additionalTableComponents, defaultColumn }) {
 
     const {
         getTableProps,

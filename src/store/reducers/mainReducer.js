@@ -9,6 +9,12 @@ const defaultState = {
     cabsPCI: "",
     cabsInsult: "",
     cabsDeath: "",
+    users: [],
+
+    manipulatingData: [],
+    currentManipulatingValue: -1,
+    serviceName: "",
+    serviceTableHeader: [],
 }
 
 function reducer(state = defaultState, action) {
@@ -44,6 +50,21 @@ function reducer(state = defaultState, action) {
         case "SET_CABS_DEATH":
             return { ...state, cabsDeath: action.cabsDeath }
 
+        case "SET_MANIPULATING_DATA":
+            return { ...state, manipulatingData: action.manipulatingData }
+
+        case "SET_CURRENT_MANIPULATING_VALUE":
+            return { ...state, currentManipulatingValue: action.currentManipulatingValue }
+
+        case "SET_SERVICE_NAME":
+            return { ...state, serviceName: action.serviceName }
+
+        case "SET_SERVICE_TABLE_HEADER":
+            return { ...state, serviceTableHeader: action.serviceTableHeader }
+            
+        case "SET_USERS":
+            return { ...state, users: action.users }
+            
         default:
             return state
     }

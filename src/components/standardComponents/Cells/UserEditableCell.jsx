@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react"
 
 import { roles } from "../../../config"
+import { type } from "@testing-library/user-event/dist/type"
 
 const UserEditableCell = ({
     value: initialValue,
@@ -16,11 +17,11 @@ const UserEditableCell = ({
 
     const selectOnChange = e => {
         setValue(e.target.value)
-        updateData(index, id, e.target.value)
+        //updateData(index, id, e.target.value)
     }
 
     const onBlur = () => {
-        updateData(index, id, value)
+        //updateData(index, id, value)
     }
 
     useEffect(() => {
@@ -53,4 +54,8 @@ const UserEditableCell = ({
     return <input className="table-input" value={value} onChange={onChange} onBlur={onBlur} />
 }
 
-export default UserEditableCell
+const UserColumn = {
+    Cell: UserEditableCell
+}
+
+export { UserEditableCell, UserColumn }

@@ -8,12 +8,11 @@ function Admin(props) {
     return (
         <>
             <Table
+                defaultColumn={props.defaultColumn}
                 columns={props.columns}
                 data={props.data}
-                updateData={props.updateData}
                 skipPageReset={props.skipPageReset}
-                onDelete={props.onDelete}
-                onSave={props.onSave}
+                additionalTableComponents={props.additionalTableComponents}
             />
             <button className="standard-button">
                 Добавить пользователя
