@@ -1,6 +1,8 @@
 import { React, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
+import { cabsPatientsHeader } from "../../config/tableHeaders";
+
 import { withRouter } from '../../utils/withRouter';
 
 import Token from '../../model/dataClasses/Token'
@@ -8,6 +10,14 @@ import Token from '../../model/dataClasses/Token'
 import Login from './Login'
 
 function LoginComponent(props) {
+
+    const setServiceName = (nameValue) => {
+        dispatch({ type: "SET_SERVICE_NAME", serviceName: nameValue })
+    }
+
+    const setServiceTableHeader = (tableHeaderValue) => {
+        dispatch({ type: "SET_SERVICE_TABLE_HEADER", serviceTableHeader: tableHeaderValue })
+    }
 
     const [login, setLogin] = useState("")
     const handleLoginChange = (event) => {
@@ -33,7 +43,11 @@ function LoginComponent(props) {
             setLoginState(login)
             localStorage.setItem('accessToken', token.accessToken)
             localStorage.setItem('refreshToken', token.refreshToken)
-            props.navigate('/profile')
+            localStorage.setItem('serviceName', 'cabs')
+        localStorage.setItem('serviceTableHeader', JSON.stringify(cabsPatientsHeader))
+        setServiceName('cabs')
+        setServiceTableHeader(cabsPatientsHeader)
+            props.navigate('/cabs')
         }
         else {
             alert("Неверный логин или пароль")

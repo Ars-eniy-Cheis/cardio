@@ -24,17 +24,17 @@ function ChooseServiceComponent(props) {
     const handleCovid = async () => {
         localStorage.setItem('serviceName', 'covid')
         localStorage.setItem('serviceTableHeader', JSON.stringify(covidPatientsHeader))
-        //setServiceName('covid')
-        //setServiceTableHeader(covidPatientsHeader)
-        props.navigate('/profile/covid')
+        setServiceName('covid')
+        setServiceTableHeader(covidPatientsHeader)
+        props.navigate('/covid')
     }
 
     const handleCabs = async () => {
         localStorage.setItem('serviceName', 'cabs')
         localStorage.setItem('serviceTableHeader', JSON.stringify(cabsPatientsHeader))
-        //setServiceName('cabs')
-        //setServiceTableHeader(cabsPatientsHeader)
-        props.navigate('/profile/cabs')
+        setServiceName('cabs')
+        setServiceTableHeader(cabsPatientsHeader)
+        props.navigate('/cabs')
     }
     
     return (

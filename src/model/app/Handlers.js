@@ -4,6 +4,8 @@ import Patients from '../../model/dataClasses/Patients'
 import User from '../dataClasses/User'
 import Users from '../dataClasses/Users'
 
+import { covidPatientsHeader, cabsPatientsHeader } from '../../config/tableHeaders'
+
 async function handleExit (navigate) {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
@@ -79,4 +81,22 @@ async function handleDeleteUser (navigate, state, stateChanger, id) {
     }
 }
 
-export { handleExit, handleGetPatients, handleAddNew, handleChange, handleDeletePatient, handleGetUsers, handleDeleteUser }
+async function selectHandle (itemId, nameStateChanger, headerStateChanger, navigate) {
+  console.log("itemId: ", itemId);
+  localStorage.setItem('serviceName', itemId)
+  nameStateChanger(itemId)
+  if(!itemId){
+    handleExit(navigate)
+  }
+  else if(itemId === 'covid'){
+    localStorage.setItem('serviceTableHeader',JSON.stringify(covidPatientsHeader))
+    headerStateChanger(covidPatientsHeader)
+  }
+  else if (itemId === 'cabs'){
+    localStorage.setItem('serviceTableHeader',JSON.stringify(cabsPatientsHeader))
+    headerStateChanger(cabsPatientsHeader)
+  }
+  navigate('/' + itemId)
+}
+
+export { handleExit, handleGetPatients, handleAddNew, handleChange, handleDeletePatient, handleGetUsers, handleDeleteUser, selectHandle }

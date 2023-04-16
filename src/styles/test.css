@@ -1,7 +1,24 @@
+.grid {
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(2, auto);
+}
+
+.navigation {
+    width: 220px;
+    grid-column-start: 2;
+    grid-column-end: 1;
+}
+
+.edit {
+    width: 1700px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
 body {
     font-family: Arial, sans-serif;
     font-size: 16px;
-   
 }
 
 /* Стиль для заголовка */

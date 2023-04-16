@@ -11,31 +11,25 @@ import "../../styles/test.css"
 
 function EditingService(props) {
     return (
-        <>
-            <div>
-                
-                <Breadcrumb className="breadcrumb">
-                    <Breadcrumb.Item className="breadcrumb" href="/profile">Выбор сервиса</Breadcrumb.Item>
-                    <Breadcrumb.Item className="breadcrumb" active>Прогноз по шунтированию</Breadcrumb.Item>
-                </Breadcrumb>
-                <Button variant="primary" className="cabsButton" onClick={props.handleExit}>
-                    Выйти
-                </Button>
+        <div className="grid">
+            <div className="navigation">
                 <Navigation
                     activeItemId={props.activeItemId}
                     onSelect={props.onSelect}
                     items={props.menuItems}
                 />
             </div>
-            <Table
-                defaultColumn={props.defaultColumn}
-                columns={props.columns}
-                data={props.data}
-                skipPageReset={props.skipPageReset}
-                additionalTableComponents={props.additionalTableComponents}
-            />
-            <Button onClick={props.handleNewPatient} className="cabsButton"> Новый пациент </Button>
-        </>
+            <div  className="edit">
+                <Table
+                    defaultColumn={props.defaultColumn}
+                    columns={props.columns}
+                    data={props.data}
+                    skipPageReset={props.skipPageReset}
+                    additionalTableComponents={props.additionalTableComponents}
+                />
+                <Button onClick={props.handleNewPatient} className="cabsButton"> Новый пациент </Button>
+            </div>
+        </div>
     )
 }
 

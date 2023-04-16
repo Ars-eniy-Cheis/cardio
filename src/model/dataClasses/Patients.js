@@ -4,7 +4,7 @@ import Request from "../Request"
 
 import Patient from './Patient'
 
-import { patientsAnswer } from "./fakeAnswers";
+import { patientsAnswer, patientsAnswer2 } from "./fakeAnswers";
 
 class Patients {
 
@@ -19,9 +19,16 @@ class Patients {
         //this.status = await this.answer.status
         //let patientsAnswer = await this.answer.json()
 
+        for(let i = 0; i < 3; i++){
+            this.patients.push(new Patient(patientsAnswer[Math.floor(Math.random() * 3)]))
+        }
+
+        
+        /*
         for(let i = 0; i < patientsAnswer.length; i++){
             this.patients.push(new Patient(patientsAnswer[i]))
         }
+        */
     }
 
 }

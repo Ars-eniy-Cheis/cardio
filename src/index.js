@@ -36,10 +36,10 @@ const router = (
         <Route path="/" element={mainPage} />
         <Route path="/login" element={mainPage} />
         <Route path="/profile" element={profile} />
-        <Route path="/profile/covid" element={editingService} />
-        <Route path="/profile/covid/patient" element={covidPatient} />
-        <Route path="/profile/cabs" element={editingService} />
-        <Route path="/profile/cabs/patient" element={cabsPatient} />
+        <Route path="/covid" element={editingService} />
+        <Route path="/covid/patient" element={covidPatient} />
+        <Route path="/cabs" element={editingService} />
+        <Route path="/cabs/patient" element={cabsPatient} />
         <Route path="/admin" element={admin} />
         <Route path="*" element={mainPage} />
       </Routes>
