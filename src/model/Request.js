@@ -106,7 +106,20 @@ async function patchPatientAsync(accessToken, patientID, patientJSON) {
     return response
 }
 
+async function getParametersAsync(accessToken) {
+    let response = await fetch(path + "parameters/", {
+        method: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': accessToken
+        },
+    })
+    //console.log(await response.json())
+    return response
+}
+
 export default { 
     pingAsync, loginAsync, refreshTokenAsync, getPatientsAsync, addPatientAsync, 
-    getPatientAsync, deletePatientAsync, patchPatientAsync
+    getPatientAsync, deletePatientAsync, patchPatientAsync, getParametersAsync
 }

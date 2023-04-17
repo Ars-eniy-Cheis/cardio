@@ -6,8 +6,6 @@ import { withRouter } from '../../utils/withRouter';
 import { PatientColumn } from "../../components/standardComponents/Cells/PatientEditableCell";
 import { userItems } from "../../config/sideMenuItems";
 
-import { cabsPatientsHeader, covidPatientsHeader } from "../../config/tableHeaders";
-
 import { handleExit, handleAddNew, handleChange, handleDeletePatient, handleGetPatients, selectHandle } from "../../model/app/Handlers";
 
 import EditingService from "./EditingService";
@@ -26,7 +24,7 @@ function EditingServiceComponent(props) {
 
   let serviceTableHeaderState = useSelector(state => state.serviceTableHeader)
   if(serviceTableHeaderState.length === 0){
-    serviceTableHeaderState = JSON.parse(localStorage.getItem('serviceTableHeader'))
+    serviceTableHeaderState = JSON.parse(localStorage.getItem('serviceTableHeader')) //Не привязываться к localStorage на уровне компонента
   }
   const setServiceTableHeaderState = (serviceTableHeader) => {
     dispatch({ type: "SET_SERVICE_TABLE_HEADER", serviceTableHeader: serviceTableHeader })
@@ -37,8 +35,8 @@ function EditingServiceComponent(props) {
     dispatch({ type: "SET_MANIPULATING_DATA", manipulatingData: manipulatingDataValue })
   }
 
-  const setCurrentManipulatingValue = (idValue) => {
-    dispatch({ type: "SET_CURRENT_MANIPULATING_VALUE", currentManipulatingValue: idValue })
+  const setCurrentManipulatingValueId = (idValue) => {
+    dispatch({ type: "SET_CURRENT_MANIPULATING_VALUE_ID", currentManipulatingValueId: idValue })
   }
 
   const additionalTableComponents = [];
@@ -50,7 +48,7 @@ function EditingServiceComponent(props) {
           <button className="tablebutton" onClick={() => { handleDeletePatient(props.navigate, manipulatingDataState, setManipulatingDataState, manipulatingDataState[i].id) }}> <tablebutton-text>Удалить</tablebutton-text> </button>
         </td>                
         <td>
-          <button className="tablebutton" onClick={() => { handleChange(props.navigate, '/' + serviceNameState + '/patient', setCurrentManipulatingValue, manipulatingDataState[i].id) }}> <tablebutton-text>Изменить</tablebutton-text> </button>
+          <button className="tablebutton" onClick={() => { handleChange(props.navigate, '/' + serviceNameState + '/patient', setCurrentManipulatingValueId, manipulatingDataState[i].id) }}> <tablebutton-text>Изменить</tablebutton-text> </button>
         </td>
       </>
     )
@@ -62,7 +60,7 @@ function EditingServiceComponent(props) {
 
   useEffect(() => {
     if (!didMount.current) {
-      setCurrentManipulatingValue(-1)
+      setCurrentManipulatingValueId(-1)
     }
     handleGetPatients(setManipulatingDataState)
     
@@ -79,7 +77,7 @@ function EditingServiceComponent(props) {
         menuItems = {userItems}
         activeItemId = {serviceNameState}
         onSelect = { ({itemId}) => {selectHandle(itemId, setServiceNameState, setServiceTableHeaderState, props.navigate)} }
-        handleExit={() => {handleExit(props.navigate)}}
+        handleExit={() => {handleExit(() => {props.navigate('/')}) }} //Передать колбэк без параметров
         handleNewPatient={() => { handleAddNew(props.navigate, '/' + serviceNameState +'/patient')}}
       />
     </>

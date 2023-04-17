@@ -8,7 +8,9 @@ const defaultState = {
     users: [],
 
     manipulatingData: [],
-    currentManipulatingValue: -1,
+    parameters: [],
+    currentManipulatingValueId: -1,
+    currentManipulatingValue: {},
     serviceName: "",
     serviceTableHeader: [],
 }
@@ -36,6 +38,12 @@ function reducer(state = defaultState, action) {
 
         case "SET_MANIPULATING_DATA":
             return { ...state, manipulatingData: action.manipulatingData }
+
+        case "SET_PARAMETERS":
+            return { ...state, parameters: action.parameters }
+
+        case "SET_CURRENT_MANIPULATING_VALUE_ID":
+            return { ...state, currentManipulatingValueId: action.currentManipulatingValueId }
 
         case "SET_CURRENT_MANIPULATING_VALUE":
             return { ...state, currentManipulatingValue: action.currentManipulatingValue }

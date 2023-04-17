@@ -9,9 +9,8 @@ import reportWebVitals from './reportWebVitals';
 import reducer from './store/reducers/mainReducer'
 
 import Login from './pages/Login';
-import CovidPatient from './pages/CovidPatient';
-import CabsPatient from './pages/CabsPatient';
 import Admin from './pages/Admin';
+import Patient from './pages/Patient';
 
 import EditingService from './pages/EditingService';
 
@@ -20,8 +19,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = createStore(reducer);
 
 const mainPage = (<Login />);
-const covidPatient = (<CovidPatient />);
-const cabsPatient = (<CabsPatient />);
+const covidPatient = (<Patient />);
+const cabsPatient = (<Patient />);
 const admin = (<Admin />);
 const editingService = (< EditingService />)
 

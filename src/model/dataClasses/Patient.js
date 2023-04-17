@@ -113,11 +113,16 @@ id, dateOfAdmission, probabilityOfDeath,
     }
 
     async addPatient(accessToken, patientJSON){
-        console.log(patientJSON);
         //this.answer = await Request.addPatientAsync(refreshToken, patientJSON)
         //this.status = await this.answer.status
         //let patient = await this.answer.json()
         //return patient
+        patientJSON.probabilityOfDeath = true
+        patientJSON.PCI = true
+        patientJSON.death = false
+        patientJSON.heartAttack = false
+        patientJSON.insult = true
+        return patientJSON
     }
     
     async getPatient(accessToken, patientID){
@@ -140,6 +145,12 @@ id, dateOfAdmission, probabilityOfDeath,
         //this.status = await this.answer.status
         //let patient = await this.answer.json()
         //return patient
+        patientJSON.probabilityOfDeath = false
+        patientJSON.PCI = true
+        patientJSON.death = false
+        patientJSON.heartAttack = false
+        patientJSON.insult = true
+        return patientJSON
     }
 
 }

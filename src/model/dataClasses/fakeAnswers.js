@@ -34,7 +34,7 @@ const patientsAnswer = [
         dateOfAdmission: 1672954315,
         probabilityOfDeath: true,
         sex: true,
-        age: 45,
+        age: 49,
         urea: 234,
         creatinine: 523,
         ast: 131,
@@ -207,7 +207,7 @@ const patientsAnswer = [
         dateOfAdmission: 1672954356,
         probabilityOfDeath: false,
         sex: false,
-        age: 45,
+        age: 60,
         urea: 234,
         creatinine: 523,
         ast: 131,
@@ -290,125 +290,146 @@ const patientsAnswer = [
     }
 ]
 
-const cabsParameters = [
+const cabsParametersAnswer = [
 
 ]
 
-const covidParameters = [
+const covidParametersAnswer = [
     {
+      "label": "Пол",
       "name": "sex",
       "type": "doubleSelection",
+      "values": ["Муж", "Жен"],
       "isRequired": true
     },
     {
+      "label": "Возраст",
       "name": "age",
       "type": "textInput",
       "isRequired": true,
       "inputLimitation": 120.0
     },
     {
+      "label": "Мочевина",
       "name": "urea",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 250.0
     },
     {
+      "label": "Креатинин",
       "name": "creatinine",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 5.0
     },
     {
+      "label": "АСТ",
       "name": "ast",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 200.0
     },
     {
+      "label": "АЛТ",
       "name": "alt",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 200.0
     },
     {
+      "label": "Глюкоза",
       "name": "glucose",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 300.0
     },
     {
+      "label": "Лейкоциты",
       "name": "leukocytes",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 30.0
     },
     {
+      "label": "Тромбоциты",
       "name": "platelets",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 800.0
     },
     {
+      "label": "Нейтрофилы",
       "name": "neutrophils",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 15.0
     },
     {
+      "label": "Лимфоциты",
       "name": "lymphocytes",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 10.0
     },
     {
+      "label": "D-димер",
       "name": "dDimer",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 5.0
     },
     {
+      "label": "АГ",
       "name": "ag",
-      "type": "textInput",
+      "type": "doubleSelection",
+      "values": ["Да", "Нет"],
       "isRequired": false,
-      "inputLimitation": 50.0
     },
     {
+      "label": "СД",
       "name": "sd",
-      "type": "textInput",
+      "type": "doubleSelection",
+      "values": ["Да", "Нет"],
       "isRequired": false,
-      "inputLimitation": 3.0
     },
     {
+      "label": "ИБС (с ХСН)",
       "name": "ibs",
-      "type": "textInput",
+      "type": "doubleSelection",
+      "values": ["Да", "Нет"],
       "isRequired": false,
-      "inputLimitation": 200.0
     },
     {
+      "label": "ХОБЛ + астма",
       "name": "hobl",
-      "type": "textInput",
+      "type": "doubleSelection",
+      "values": ["Да", "Нет"],
       "isRequired": false,
-      "inputLimitation": 15.0
     },
     {
+      "label": "ХБП (3-5)",
       "name": "hbp",
-      "type": "textInput",
+      "type": "doubleSelection",
+      "values": ["Да", "Нет"],
       "isRequired": false,
-      "inputLimitation": 180.0
     },
     {
+      "label": "CRP",
       "name": "crp",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 300.0
     },
     {
+      "label": "СКФ (CKD-EPI 2021)",
       "name": "skf",
       "type": "textInput",
       "isRequired": false,
       "inputLimitation": 100.0
     },
     {
+      "label": "Нейтрофил-лимф. соотношение",
       "name": "neutrophilLymphocyteRatio",
       "type": "textInput",
       "isRequired": false,
@@ -416,4 +437,4 @@ const covidParameters = [
     }
   ]
 
-export {usersAnswer, patientsAnswer, cabsParameters, covidParameters }
+export {usersAnswer, patientsAnswer, cabsParametersAnswer, covidParametersAnswer }

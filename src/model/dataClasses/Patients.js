@@ -23,7 +23,6 @@ class Patients {
             this.patients.push(new Patient(patientsAnswer[Math.floor(Math.random() * 3)]))
         }
 
-        
         /*
         for(let i = 0; i < patientsAnswer.length; i++){
             this.patients.push(new Patient(patientsAnswer[i]))

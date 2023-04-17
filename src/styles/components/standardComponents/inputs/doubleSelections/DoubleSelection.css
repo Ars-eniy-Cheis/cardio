@@ -23,7 +23,7 @@
       padding: 0;
       margin: 0px;
       margin-left: 10px;
-      margin-top: 0px;
+      margin-top: 11px;
       transition: box-shadow 150ms cubic-bezier(0.95, 0.15, 0.5, 1.25);
       pointer-events: none; }
       .l-radio input:focus {
@@ -39,13 +39,13 @@
     }
 
       .pretty-text{
+        font-family: Arial, sans-serif;
+        font-size: 24px;
         display: inline-block;
-        font: small-caps bold 24px/1 sans-serif;
         width: 100%;
         margin: 0px;
-        margin-bottom: 20px;
+        margin-bottom: 5px;
         color: black;
-        font-size: 20px;
         letter-spacing: 0px;
         
       }
