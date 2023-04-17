@@ -3,9 +3,17 @@ import { Input, useValidation, Collection } from "usetheform";
 
 import "../../../styles/components/standardComponents/inputs/doubleSelections/DoubleSelection.css"
 
-const required = (value) => (value && value !== "" ? undefined : "Обязательное поле");
+//const required = (value) => (value && value !== "" ? undefined : "Обязательное поле");
 
 export default function DoubleSelection(props) {
+
+  const required = (value) =>{
+    if((props.isRequired && (!value || value === "")))
+      return "Обязательное поле"
+    else 
+      return undefined
+  }
+
   const [status, validation] = useValidation([required]);
 
   let input1 = <Input tabIndex="1" type="radio" name={props.name} value={props.value1} />

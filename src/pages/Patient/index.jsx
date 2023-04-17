@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { useMultipleForm } from "usetheform"
 
-import { handleGetPatient, handleGetParameters, handleExit, handleSubmitWizard } from "../../model/app/Handlers"
+import { handleGetPatient, handleGetParameters, handleSubmitWizard } from "../../model/app/Handlers"
 
 import { withRouter } from '../../utils/withRouter';
 

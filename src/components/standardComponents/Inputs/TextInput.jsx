@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  } from "react";
 import { Input, useValidation } from "usetheform";
 
 import "../../../styles/components/standardComponents/inputs/textInputs/TextInput.css"
@@ -10,9 +10,7 @@ export default function TextInput({ label, isRequired, inputLimitation, ...props
       return "Обязательное поле"
     else 
       return undefined
-    return (value && value !== ""  ? undefined : "Обязательное поле");
-  } 
-
+  }
 
   const isValidValue = (value) =>
   {
