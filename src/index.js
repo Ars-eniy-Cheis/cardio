@@ -9,10 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import reducer from './store/reducers/mainReducer'
 
 import Login from './pages/Login';
-import ChooseService from './pages/ChooseService';
-import Covid from './pages/Covid';
 import CovidPatient from './pages/CovidPatient';
-import Cabs from './pages/Cabs';
 import CabsPatient from './pages/CabsPatient';
 import Admin from './pages/Admin';
 
@@ -23,7 +20,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = createStore(reducer);
 
 const mainPage = (<Login />);
-const profile = (<ChooseService />);
 const covidPatient = (<CovidPatient />);
 const cabsPatient = (<CabsPatient />);
 const admin = (<Admin />);
@@ -35,7 +31,6 @@ const router = (
       <Routes>
         <Route path="/" element={mainPage} />
         <Route path="/login" element={mainPage} />
-        <Route path="/profile" element={profile} />
         <Route path="/covid" element={editingService} />
         <Route path="/covid/patient" element={covidPatient} />
         <Route path="/cabs" element={editingService} />

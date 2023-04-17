@@ -17,10 +17,10 @@ import CovidPatient from './CovidPatient'
 function CovidPatientComponent(props) {
 
     const dispatch = useDispatch()
-    const currentCovidPatientIdState = useSelector(state => state.currentCovidPatientId)
+    const currentCovidPatientIdState = useSelector(state => state.currentManipulatingValue)
 
     const setCurrentCovidPatientId = (idValue) => {
-        dispatch({ type: "SET_CURRENT_COVID_PATIENT_ID", currentCovidPatientId: idValue })
+        dispatch({ type: "SET_CURRENT_MANIPULATING_VALUE", currentManipulatingValue: idValue })
     }
 
     const covidPatientsState = useSelector(state => state.covidPatients)

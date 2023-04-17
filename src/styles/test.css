@@ -1,3 +1,21 @@
+tablebutton-text {
+    text-decoration: underline;
+    color: blue;
+    transition: all .1s linear;
+    
+}
+  
+tablebutton-text:hover {
+    color: #a58bdd;
+}
+
+.tablebutton{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
 .grid {
     display: grid;
     grid-gap: 30px;

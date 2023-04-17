@@ -1,8 +1,7 @@
 import { React } from "react"
 
-import styled from 'styled-components'
-
 import Table from "../../components/standardComponents/Tables/Table"
+import "../../styles/test.css"
 
 function Admin(props) {
     return (

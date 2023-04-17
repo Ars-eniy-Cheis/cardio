@@ -33,10 +33,10 @@ function AdminComponent(props) {
         (
             <>
                 <td>
-                    <button onClick={() => { handleDeleteUser(props.navigate, usersState, setUsersState, usersState[i].id) }}> <tablebutton>Удалить</tablebutton> </button>
+                    <button className="tablebutton" onClick={() => { handleDeleteUser(props.navigate, usersState, setUsersState, usersState[i].id) }}> <tablebutton-text>Удалить</tablebutton-text> </button>
                 </td>                
                 <td>
-                    <button onClick={() => { }}> <tablebutton>Сохранить</tablebutton> </button>
+                    <button className="tablebutton" onClick={() => { }}> <tablebutton-text>Сохранить</tablebutton-text> </button>
                 </td>     
             </>
         )
