@@ -1,6 +1,6 @@
 const roles = new Set(["admin", "user"]);
 
-const parametersPerWizardPage = 15;
+const parametersPerWizardPage = 20;
 
 export {
     parametersPerWizardPage,

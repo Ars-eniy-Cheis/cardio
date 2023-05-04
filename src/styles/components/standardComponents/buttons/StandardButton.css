@@ -9,3 +9,12 @@
     margin-top: 10px;
     float: left;
 }
+
+.go-back-button {
+    margin: 20px;
+    background-color: #555;
+  }
+  
+  .go-back-button:hover {
+    background-color: #444;
+  }

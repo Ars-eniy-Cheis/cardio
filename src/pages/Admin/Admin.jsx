@@ -13,9 +13,9 @@ function Admin(props) {
                 skipPageReset={props.skipPageReset}
                 additionalTableComponents={props.additionalTableComponents}
             />
-            <button className="standard-button">
+            <button onClick={() => { props.addUser() }} className="standard-button">
                 Добавить пользователя
-            </button>
+            </button  >
         </>
     )
 }

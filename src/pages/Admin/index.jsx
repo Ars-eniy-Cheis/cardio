@@ -22,6 +22,10 @@ function AdminComponent(props) {
         dispatch({ type: "SET_USERS", users: usersValue })
     }
 
+    const addUser = () => {
+        props.navigate('/admin/add-user')
+    }
+
     const columns = useMemo(
         () => usersHeader,
         []
@@ -33,8 +37,11 @@ function AdminComponent(props) {
         (
             <>
                 <td>
+                    <button className="tablebutton" onClick={() => { props.navigate('/admin/reset-password') }}> <tablebutton-text>Сброс пароля</tablebutton-text> </button>
+                </td>
+                <td>
                     <button className="tablebutton" onClick={() => { handleDeleteUser(props.navigate, usersState, setUsersState, usersState[i].id) }}> <tablebutton-text>Удалить</tablebutton-text> </button>
-                </td>                
+                </td>             
                 <td>
                     <button className="tablebutton" onClick={() => { }}> <tablebutton-text>Сохранить</tablebutton-text> </button>
                 </td>     
@@ -57,6 +64,7 @@ function AdminComponent(props) {
             defaultColumn={UserColumn}
             columns={columns}
             data={usersState}
+            addUser={addUser}
             skipPageReset={skipPageReset}
             additionalTableComponents={additionalTableComponents}
         />
