@@ -15,7 +15,7 @@ const PatientEditableCell = ({
         setValue(initialValue)
     }, [initialValue])
 
-    if (id === "dateOfAdmission") {
+    if (id === "createdAt" || id === "updatedAt") {
         if (value !== 0) {
             return new Date(value * 1000).toLocaleDateString("en-GB")
         }

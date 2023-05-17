@@ -7,18 +7,18 @@ const required = (value) => (value && value !== "" ? undefined : "Обязате
 
 export default function TripleSelection(props) {
   const [status, validation] = useValidation([required]);
-
-  let input1 = <Input tabIndex="1" type="radio" name={props.name} value={props.value1} />
-  let input2 = <Input tabIndex="2" type="radio" name={props.name} value={props.value2} />
-  let input3 = <Input tabIndex="3" type="radio" name={props.name} value={props.value3} />
-  if (props.selected === "s" && props.selected != undefined) {
-    input1 = <Input tabIndex="1" type="radio" name={props.name} value={props.value1} checked />
+  let keys = Object.keys(props.enum)
+  let input1 = <Input tabIndex="1" type="radio" name={props.name} value={keys[0]} />
+  let input2 = <Input tabIndex="2" type="radio" name={props.name} value={keys[1]} />
+  let input3 = <Input tabIndex="3" type="radio" name={props.name} value={keys[2]} />
+  if (props.selected === keys[0] && props.selected != undefined) {
+    input1 = <Input tabIndex="1" type="radio" name={props.name} value={keys[0]} checked />
   }
-  else if (props.selected === "f" && props.selected != undefined) {
-    input2 = <Input tabIndex="2" type="radio" name={props.name} value={props.value2} checked />
+  else if (props.selected === keys[1] && props.selected != undefined) {
+    input2 = <Input tabIndex="2" type="radio" name={props.name} value={keys[1]} checked />
   }
-  else if (props.selected === "n" && props.selected != undefined) {
-    input3 = <Input tabIndex="3" type="radio" name={props.name} value={props.value3} checked />
+  else if (props.selected === keys[2] && props.selected != undefined) {
+    input3 = <Input tabIndex="3" type="radio" name={props.name} value={keys[2]} checked />
   }
 
   return (

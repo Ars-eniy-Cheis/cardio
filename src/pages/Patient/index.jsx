@@ -39,7 +39,7 @@ function PatientComponent(props) {
     useEffect(() => {
         if (!didMount.current) {
             handleGetPatient(currentPatientIdState, setCurrentPatientState)
-            handleGetParameters(setCurrentParameters)
+            handleGetParameters(setCurrentParameters, currentServiceName)
         }
     }, [])
 
@@ -50,14 +50,15 @@ function PatientComponent(props) {
     const [getWizardState, wizard] = useMultipleForm();
 
     let result = []
+    console.log('currentServiceName:', currentServiceName)
     if(currentServiceName === 'covid') {
-        currentPatientState ? result.push(currentPatientState.probabilityOfDeath) : result.push(undefined)
+        currentPatientState ? result.push(currentPatientState.death) : result.push(undefined)
     }
     else if(currentServiceName === 'cabs') {
         if(currentPatientState){
-            result.push(currentPatientState.heartAttack)
-            result.push(currentPatientState.PCI)
-            result.push(currentPatientState.insult)
+            result.push(currentPatientState.MI)
+            result.push(currentPatientState.CI)
+            result.push(currentPatientState.insultOutcome)
             result.push(currentPatientState.death)
         }
         else{
@@ -80,14 +81,16 @@ function PatientComponent(props) {
         if(currentParameters.length % parametersPerWizardPage > 0)
             pageCount++
 
-        console.log("pageCount: ", pageCount);
+        console.log("pageCount: ", pageCount)
+        console.log("result: ", result)
+        
         for(let i = 0; i < pageCount; i++){
             pages.push(
                 <>
                     {currentPage === (i + 1) && (
                         <WizardFormPage 
                             {...wizard} 
-                            onSubmit={( i + 1 ) === pageCount ? () => {handleSubmitWizard(() => {props.navigate('/')}, currentPatientState, setCurrentPatientState, getWizardState)} : () => {nextPage()} }
+                            onSubmit={( i + 1 ) === pageCount ? () => {handleSubmitWizard(() => {props.navigate('/')}, currentPatientState, setCurrentPatientState, getWizardState, currentServiceName)} : () => {nextPage()} }
                             prevPage={ ( i + 1 ) === 1 ? undefined : prevPage}
                             currentPatient={currentPatientState ? currentPatientState : {}}
                             currentParameters={currentParameters.slice(i * parametersPerWizardPage, i * parametersPerWizardPage + parametersPerWizardPage)}

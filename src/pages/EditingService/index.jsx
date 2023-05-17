@@ -62,7 +62,7 @@ function EditingServiceComponent(props) {
     if (!didMount.current) {
       setCurrentManipulatingValueId(-1)
     }
-    handleGetPatients(setManipulatingDataState)
+    handleGetPatients(setManipulatingDataState, serviceNameState)
     
   }, [useSelector(state => state.serviceTableHeader)])
 

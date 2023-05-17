@@ -3,7 +3,7 @@ import { Input, useValidation } from "usetheform";
 
 import "../../../styles/components/standardComponents/inputs/textInputs/TextInput.css"
 
-export default function TextInput({ label, isRequired, inputLimitation, ...props }) {
+export default function TextInput({ label, isRequired, limits, ...props }) {
 
   const required = (value) =>{
     if((isRequired && (!value || value === "")))
@@ -16,7 +16,7 @@ export default function TextInput({ label, isRequired, inputLimitation, ...props
   {
     if(!value)
       return undefined
-    return (!(value && !/^[0-9\b]+$/i.test(value)) && (parseFloat(value) <= inputLimitation)) ? undefined: 'Неверное значение'
+    return (!(value && !/(^\d+$)|(^\d+.\d+$)|[,.]/i.test(value)) && (parseFloat(value) <= parseFloat(limits.max) && parseFloat(value) >= parseFloat(limits.min))) ? undefined: 'Неверное значение'
   }
     
 

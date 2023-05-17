@@ -3,6 +3,18 @@ import Request from "../Request"
 import { patientsAnswer } from "./fakeAnswers";
 
 class Patient {
+    constructor(id, description, properties, type, createdAt, updatedAt) {
+        this.id = id;
+        this.description = description
+        this.properties = properties
+        this.type = type
+        this.createdAt = createdAt
+        this.updatedAt = updatedAt
+    }
+}
+
+/*
+class Patient {
 //
 /*
 id, dateOfAdmission, probabilityOfDeath, 
@@ -19,7 +31,7 @@ id, dateOfAdmission, probabilityOfDeath,
         ceaFteer, ancoPerationsAfter, antiplateletAgentsAfter, anticoagulants, 
         babAfter, akkAfter, iAPFAfter, araAfter, diureticsAfter, statins, 
         heartAttack, PCI, insult, death
-*/
+
     constructor(object) 
         {
 
@@ -154,5 +166,6 @@ id, dateOfAdmission, probabilityOfDeath,
     }
 
 }
+*/
 
 export default Patient

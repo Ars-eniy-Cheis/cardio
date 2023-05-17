@@ -32,7 +32,7 @@ function LoginComponent(props) {
             handleLoginChange={(event) => {handleEventChange(event, setLogin)}}
             password={password}
             handlePasswordChange={(event) => {handleEventChange(event, setPassword)}}
-            handleEnter={() => {handleEnter(login, password, setLoginState, setServiceName, setServiceTableHeader, () => {props.navigate('/cabs')})}}
+            handleEnter={() => {handleEnter(login, password, setLoginState, setServiceName, setServiceTableHeader, props.navigate)}}
         />
     )
 }

@@ -4,7 +4,7 @@ import Request from "../Request"
 
 import Parameter from './Parameter'
 
-import { covidParametersAnswer } from "./fakeAnswers";
+import { schemasAnswer } from "./fakeAnswers";
 
 class Parameters {
 
@@ -19,8 +19,8 @@ class Parameters {
         //this.status = await this.answer.status
         //let covidParametersAnswer = await this.answer.json()
         
-        for(let i = 0; i < covidParametersAnswer.length; i++){
-            this.parameters.push(new Parameter(covidParametersAnswer[i]))
+        for(let i = 0; i < schemasAnswer.length; i++){
+            this.parameters.push(new Parameter(schemasAnswer[i]))
         }
     }
 

@@ -5,7 +5,11 @@ const cabsPatientsHeader = [
     },
     {
         Header: 'Дата поступления',
-        accessor: 'dateOfAdmission',
+        accessor: 'createdAt',
+    },
+    {
+        Header: 'Дата обновления',
+        accessor: 'updatedAt',
     },
     {
         Header: 'Инфаркт миокарда',
@@ -32,12 +36,16 @@ const covidPatientsHeader = [
     },
     {
         Header: 'Дата поступления',
-        accessor: 'dateOfAdmission',
+        accessor: 'createdAt',
+    },
+    {
+        Header: 'Дата обновления',
+        accessor: 'updatedAt',
     },
     {
         Header: 'Смерть',
-        accessor: 'probabilityOfDeath',
-    },
+        accessor: 'death',
+    }
 ]
 
 const usersHeader = [
@@ -68,7 +76,7 @@ const usersHeader = [
     {
         Header: 'Роль',
         accessor: 'role',
-    },
+    }
 ]
 
 export { cabsPatientsHeader, covidPatientsHeader, usersHeader }

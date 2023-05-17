@@ -27,39 +27,91 @@ function WizardFormPage(props) {
 
   for(let i = 0; i < firstColLength; i++){
     switch (props.currentParameters[i].type) {
+      default:
+          break
       case 'textInput':
         formparametersFirstCol.push(
-          <TextInput value={props.currentPatient[props.currentParameters[i].name]} type={"text"} label={props.currentParameters[i].label} name={props.currentParameters[i].name} isRequired={props.currentParameters[i].isRequired} inputLimitation={props.currentParameters[i].inputLimitation}/>
+          <TextInput 
+            value={props.currentPatient[props.currentParameters[i].name]} 
+            type={"text"} 
+            label={props.currentParameters[i].label}
+            name={props.currentParameters[i].name} 
+            isRequired={props.currentParameters[i].isRequired} 
+            limits={props.currentParameters[i].limits}
+          />
         )
         break
       case 'doubleSelection':
         formparametersFirstCol.push(
-          <DoubleSelection selected={props.currentPatient[props.currentParameters[i].name]} title={props.currentParameters[i].label} first={props.currentParameters[i].values[0]} second={props.currentParameters[i].values[1]} name={props.currentParameters[i].name} value1={"true"} value2={"false"} isRequired={props.currentParameters[i].isRequired} />
+          <DoubleSelection 
+            selected={props.currentPatient[props.currentParameters[i].name]} 
+            title={props.currentParameters[i].label} 
+            first={props.currentParameters[i].values[0]} 
+            second={props.currentParameters[i].values[1]} 
+            name={props.currentParameters[i].name} 
+            isRequired={props.currentParameters[i].isRequired}
+            enum={props.currentParameters[i].enum ? props.currentParameters[i].enum : undefined }
+          />
         )
         break
       case 'tripleSelection':
         formparametersFirstCol.push(
-
+          < TripleSelection 
+            selected={props.currentPatient[props.currentParameters[i].name]} 
+            title={props.currentParameters[i].label} 
+            first={props.currentParameters[i].values[0]} 
+            second={props.currentParameters[i].values[1]} 
+            third={props.currentParameters[i].values[2]} 
+            name={props.currentParameters[i].name} 
+            isRequired={props.currentParameters[i].isRequired}
+            enum={props.currentParameters[i].enum ? props.currentParameters[i].enum : undefined }
+          />
         )
         break
     }
   }
 
-  for(let i = firstColLength; i < props.currentParameters.length; i++){
+  for(let i = firstColLength; i < props.currentParameters.length; i++) {
     switch (props.currentParameters[i].type) {
+      default:
+          break
       case 'textInput':
         formparametersSecondCol.push(
-          <TextInput value={props.currentPatient[props.currentParameters[i].name]} type={"text"} label={props.currentParameters[i].label} name={props.currentParameters[i].name} isRequired={props.currentParameters[i].isRequired} inputLimitation={props.currentParameters[i].inputLimitation}/>
+          <TextInput 
+            value={props.currentPatient[props.currentParameters[i].name]} 
+            type={"text"} 
+            label={props.currentParameters[i].label} 
+            name={props.currentParameters[i].name} 
+            isRequired={props.currentParameters[i].isRequired} 
+            limits={props.currentParameters[i].limits}
+          />
         )
         break
       case 'doubleSelection':
         formparametersSecondCol.push(
-          <DoubleSelection selected={props.currentPatient[props.currentParameters[i].name]} title={props.currentParameters[i].label} first={props.currentParameters[i].values[0]} second={props.currentParameters[i].values[1]} name={props.currentParameters[i].name} value1={"true"} value2={"false"} isRequired={props.currentParameters[i].isRequired} />
+          <DoubleSelection 
+            selected={props.currentPatient[props.currentParameters[i].name]} 
+            title={props.currentParameters[i].label} 
+            first={props.currentParameters[i].values[0]} 
+            second={props.currentParameters[i].values[1]} 
+            name={props.currentParameters[i].name} 
+            isRequired={props.currentParameters[i].isRequired} 
+            enum={props.currentParameters[i].enum ? props.currentParameters[i].enum : undefined }
+          />
         )
         break
       case 'tripleSelection':
         formparametersSecondCol.push(
-
+          < TripleSelection 
+            selected={props.currentPatient[props.currentParameters[i].name]} 
+            title={props.currentParameters[i].label} 
+            first={props.currentParameters[i].values[0]} 
+            second={props.currentParameters[i].values[1]} 
+            third={props.currentParameters[i].values[2]} 
+            name={props.currentParameters[i].name} 
+            isRequired={props.currentParameters[i].isRequired}
+            enum={props.currentParameters[i].enum ? props.currentParameters[i].enum : undefined }
+          />
         )
         break
     }
@@ -72,14 +124,14 @@ function WizardFormPage(props) {
   }
 
   if(props.result){
-    console.log("props.currentPatient.probabilityOfDeath:", props.currentPatient.probabilityOfDeath);
+    console.log("props.currentPatient.death:", props.currentPatient.death);
     if(props.currentServiceName === 'covid'){
       formparametersSecondCol.push(
         <>
           <br />
           <br />
           <div className="pretty-text">
-            Летальный исход: { isExist(props.currentPatient.probabilityOfDeath) }
+            Летальный исход: { isExist(props.currentPatient.death) }
           </div>
         </>
       )
@@ -90,13 +142,13 @@ function WizardFormPage(props) {
           <br />
           <br />
           <div className="pretty-text">
-            Инфаркт: {isExist(props.currentPatient.heartAttack)}
+            Инфаркт: {isExist(props.currentPatient.MI)}
             <br/>
             <br/>
-            ЧКВ: {isExist(props.currentPatient.PCI)}
+            ЧКВ: {isExist(props.currentPatient.CI)}
             <br/>
             <br/>
-            Инсульт: {isExist(props.currentPatient.insult)}
+            Инсульт: {isExist(props.currentPatient.insultOutcome)}
             <br/>
             <br/>
             Смерть: {isExist(props.currentPatient.death)}

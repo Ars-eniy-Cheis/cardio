@@ -1,0 +1,671 @@
+---
+openapi: 3.0.3
+info:
+  title: Cardio-in-the-VaiN
+  description: The API for the Cardio Center project
+  version: "1.0"
+servers:
+- url: http://cardio/api/v1/
+  description: Cardio Center API
+  
+security:
+  - jwtAuth: []
+  
+paths:
+  /users/{userId}/passwords/reset:
+    post:
+      tags:
+        - users
+      description: Resets user password
+      operationId: resetUserPassword
+      parameters:
+      - name: userId
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: User password
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+      responses:
+        "204":
+          description: Password reset succesfully
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /users/{userId}:
+    get:
+      tags:
+        - users
+      description: Gets user
+      operationId: getUser
+      parameters:
+      - name: userId
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Returns requested user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+    delete:
+      tags:
+        - users
+      description: Deletes user
+      operationId: deleteUser
+      parameters:
+      - name: userId
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "204":
+          description: User deleted successfully
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+    patch:
+      tags:
+        - users
+      description: Updates user info
+      operationId: updateUser
+      parameters:
+      - name: userId
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: User data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userUpdate'
+      responses:
+        "200":
+          description: Returns updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  
+  /users/login:
+    post:
+      tags:
+        - users
+      description: Logins user
+      operationId: loginUser
+      security: 
+        - {}
+      requestBody:
+        description: User auth credentials
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/authCredentials'
+      responses:
+        "200":
+          description: Returns authorization token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authorizationScheme'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  
+  /users/logout:
+    post:
+      tags:
+        - users
+      description: Logouts user
+      operationId: logoutUser
+      responses:
+        "204":
+          description: User logouted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authorizationScheme'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  
+  /users:
+    get:
+      tags:
+        - users
+      description: Gets users list
+      operationId: getUsers
+      parameters:
+      - name: page
+        in: query
+        description: Requested page
+        schema:
+          type: integer
+          minimum: 1
+      - name: pageSize
+        in: query
+        description: Page size
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      responses:
+        "200":
+          description: returns users list
+          content:
+            application/json:
+              schema:
+                minLength: 1
+                type: array
+                items:
+                  $ref: '#/components/schemas/usersPagination'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  
+    post:
+      tags:
+        - users
+      description: Adds user
+      operationId: addUser
+      requestBody:
+        description: User data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userCreation'
+      responses:
+        "200":
+          description: Returns created user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /users/{userId}/tokens/refresh:
+    post:
+      tags:
+        - tokens
+      description: Returns new authorization token
+      operationId: refreshToken
+      parameters:
+      - name: userId
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: User refresh token
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/authorizationScheme'
+      responses:
+        "200":
+          description: Returns new authorization token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authorizationScheme'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /patients:
+    get:
+      tags:
+        - patients
+      description: Gets patients list
+      operationId: getPatients
+      parameters:
+      - name: page
+        in: query
+        description: Requested page
+        schema:
+          type: integer
+          minimum: 1
+      - name: pageSize
+        in: query
+        description: Page size
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      responses:
+        "200":
+          description: Returns patients list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/patientsPagination'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+    post:
+      tags:
+        - patients
+      description: Adds patient
+      operationId: addPatient
+      requestBody:
+        description: Patient data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/patientCreation'
+      responses:
+        "200":
+          description: Patient added successfully
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/patient'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  
+  /patients/{patientId}:
+    get:
+      tags:
+        - patients
+      description: Gets patient
+      operationId: getPatient
+      parameters:
+      - name: patientId
+        in: path
+        description: patient id
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns requested patient
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patient'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+    delete:
+      tags:
+        - patients
+      description: Deletes patient
+      operationId: deletePatient
+      parameters:
+      - name: patientId
+        in: path
+        description: patient id
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Patient deleted successfully
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+    patch:
+      tags:
+        - patients
+      description: Updates patient
+      operationId: updateCovidPatient
+      parameters:
+      - name: patientId
+        in: path
+        description: patient id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        description: patient data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/patientUpdate'
+      responses:
+        "200":
+          description: Returns updated patient
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patient'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  
+  /schemas:
+    get:
+      tags:
+        - schemas
+      description: Gets schemas list
+      operationId: getSchemas
+      responses:
+        "200":
+          description: Returns schemas list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/wizardForm'
+
+    post:
+      tags:
+        - schemas
+      description: Creates new schema
+      operationId: createSchema
+      requestBody:
+        description: Schema definition
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/wizardForm'
+      responses:
+        "200":
+          description: Returns created schema
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wizardForm'
+
+components:
+  securitySchemes:
+    jwtAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        statusCode:
+          type: integer
+
+    user:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        username:
+          type: string
+        isDeleted:
+          type: boolean
+        createdAt:
+          type: integer
+        updatedAt:
+          type: integer
+
+    usersPagination:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+        page:
+          type: integer
+          minimum: 1
+        pageSize:
+          type: integer
+          maximum: 100
+          minimum: 1
+        numberOfElements:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+
+    userCreation:
+      type: object
+      required: ["firstName", "lastName", "username", "password"]
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+  
+    userUpdate:
+      type: object
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+
+    patient:
+      type: object
+      properties:
+        id:
+          type: integer
+        description:
+          type: string
+        type:
+          type: string
+        properties:
+          type: object
+        createdAt:
+          type: integer
+        updatedAt:
+          type: integer
+
+    patientsPagination:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/patient'
+        page:
+          type: integer
+          minimum: 1
+        pageSize:
+          type: integer
+          maximum: 100
+          minimum: 1
+        numberOfElements:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+
+    patientCreation:
+      type: object
+      required: ["type", "properties"]
+      properties:
+        description:
+          type: string
+        type:
+          type: string
+        properties:
+          type: object
+
+    patientUpdate:
+      type: object
+      properties:
+        description:
+          type: string
+        properties:
+          type: object
+  
+    authorizationScheme:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+  
+    authCredentials:
+      type: object
+      required: ["username", "password"]
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    formField:
+      type: object
+      required: ["label", "name", "type"]
+      properties:
+        label:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+          minLength: 1
+        isRequired:
+          type: boolean
+          default: false
+        limits:
+          type: object
+
+    formStep:
+      type: object
+      properties:
+        label:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/formField'
+          minLength: 1
+
+    wizardForm:
+      type: object
+      properties:
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/formStep'
+          minLength: 1
