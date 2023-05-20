@@ -2,6 +2,8 @@ import { React } from "react"
 
 import { Navigation } from 'react-minimal-side-navigation';
 
+import SidebarMenu from "../../components/customComponents/SideBarMenu";
+
 import Button from 'react-bootstrap/Button';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Table from "../../components/standardComponents/Tables/Table"
@@ -12,13 +14,12 @@ import "../../styles/test.css"
 function EditingService(props) {
     return (
         <div className="grid">
-            <div className="navigation">
-                <Navigation
-                    activeItemId={props.activeItemId}
-                    onSelect={props.onSelect}
-                    items={props.menuItems}
-                />
-            </div>
+            <SidebarMenu
+                activeItemId={props.activeItemId}
+                onItemSelect={props.onSelect}
+                items={props.menuItems}
+                onLogout={props.handleExit}
+            />
             <div  className="edit">
                 <Table
                     defaultColumn={props.defaultColumn}

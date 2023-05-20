@@ -1,8 +1,6 @@
 import React, {  } from "react";
 import { Input, useValidation } from "usetheform";
 
-import "../../../styles/components/standardComponents/inputs/textInputs/TextInput.css"
-
 export default function TextInput({ label, isRequired, limits, ...props }) {
 
   const required = (value) =>{
@@ -23,12 +21,10 @@ export default function TextInput({ label, isRequired, limits, ...props }) {
   const [status, validation] = useValidation([required, isValidValue]);
 
   return (
-    <div className="pretty-text">
-      <div className="quantity">
-        <label>{label} : </label>
-        <Input value={props.value} type={props.type} className="input" touched {...validation}  {...props} />
-      </div>
-      <p className="required">{status.error}</p>
+    <div >
+        <label className="form-label">{label} : </label>
+        <Input value={props.value} type={props.type} className="form-wizard-input" touched {...validation}  {...props} />
+      <span className="invalid-value-label">{status.error}</span>
     </div>
   );
 }

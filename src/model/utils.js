@@ -3,10 +3,10 @@ export async function wizardStateToPatientJSON (wizardState){
     Object.keys(wizardState).forEach(function (key, index) {
         if (Object.prototype.toString.call(wizardState[key]) == '[object Object]') {
             let index = key.indexOf('Object')
-            if(wizardState[key][key.substr(0, index)] === "1"){
+            if(wizardState[key][key.substr(0, index)] === "0"){
                 patient[key.substr(0, index)] = true
             }
-            else if(wizardState[key][key.substr(0, index)] === "0"){
+            else if(wizardState[key][key.substr(0, index)] === "1"){
                 patient[key.substr(0, index)] = false
             }
             else

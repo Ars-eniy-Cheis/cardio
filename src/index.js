@@ -16,6 +16,8 @@ import ResetPassword from './pages/ResetPassword';
 
 import EditingService from './pages/EditingService';
 
+import "./styles/index.css"
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const store = createStore(reducer);

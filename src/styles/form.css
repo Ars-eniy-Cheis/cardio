@@ -1,0 +1,129 @@
+.form-wizard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+  
+  /* Дополнительные стили для текстовых полей ввода чисел */
+.form-wizard-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+
+/* Стили для кнопок перехода между страницами и кнопки "назад" */
+.form-wizard .page-nav-button,
+.form-wizard .back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-wizard .page-nav-button:hover,
+.form-wizard .back-button:hover {
+    background-color: #0056b3;
+}
+
+.form-wizard .page-nav-button:active,
+.form-wizard .back-button:active {
+    background-color: #003680;
+}
+
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.btn-back {
+    order: 1;
+}
+
+.btn-next {
+    order: 3;
+}
+
+.btn-reset {
+    order: 2;
+}
+
+/* Стили для заголовков полей */
+.form-wizard .field-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* Стили для текста результатов вычислений */
+.form-wizard .calculation-result {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+    line-height: 1.6; /* Расстояние между строками */
+    margin-bottom: 10px; /* Отступ снизу для каждого блока результатов */
+}
+
+.calculation-result p {
+    margin-bottom: 10px; /* Отступ снизу для каждого блока результатов */
+}
+
+/* Стили для подписей о недопустимом значении */
+.form-wizard .invalid-value-label {
+    color: #f00;
+    font-size: 0.9em;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+/* Стили для радио кнопок */
+.form-wizard-radio {
+    margin: 0 10px 0 0;
+}
+
+.radio-option {
+    display: flex;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+.radio-option-label {
+    margin-left: 5px;
+}
+
+.form .radio-group {
+    border: 1px solid #ddd; /* граница вокруг каждой группы радио-кнопок */
+    padding: 10px; /* отступ внутри каждой группы */
+    margin-bottom: 10px; /* отступ между группами */
+    border-radius: 5px; /* скругление углов границ */
+}
+
+/* Стили для страниц формы */
+.form-wizard .page {
+    display: none;
+}
+
+.form-wizard .page.active {
+    display: block;
+}

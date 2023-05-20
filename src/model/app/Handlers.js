@@ -51,7 +51,7 @@ async function handleUpdateToken (navigate) {
 
 async function handleExit (navigate) {
     try{
-      await client.apis.users.logoutUser()
+      //await client.apis.users.logoutUser()
       navigate()
     } catch (e){
       console.error(e)

@@ -3,19 +3,13 @@ import { React } from "react"
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
-import '../../styles/pages/CabsPatient.css';
-
 function Patient(props) {
 
     return (
         <div >
-            <div>
                
-                <Button type="button" className="left-button-in-form" onClick={() => {props.back()}}> 🡐 </Button> 
+            <Button type="button" className="left-button-in-form" onClick={() => {props.back()}}> 🡐 </Button> 
 
-                <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
-
-            </div>
             <div >
                 <Container >
                     {props.form}

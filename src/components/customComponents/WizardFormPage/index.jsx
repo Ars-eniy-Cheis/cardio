@@ -13,7 +13,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import "../../../styles/components/standardComponents/containers/Container.css"
+import "../../../styles/form.css"
 
 function WizardFormPage(props) {
 
@@ -128,9 +128,7 @@ function WizardFormPage(props) {
     if(props.currentServiceName === 'covid'){
       formparametersSecondCol.push(
         <>
-          <br />
-          <br />
-          <div className="pretty-text">
+          <div className="calculation-result">
             Летальный исход: { isExist(props.currentPatient.death) }
           </div>
         </>
@@ -139,21 +137,11 @@ function WizardFormPage(props) {
     else if(props.currentServiceName === 'cabs'){
       formparametersSecondCol.push(
         <>
-          <br />
-          <br />
-          <div className="pretty-text">
-            Инфаркт: {isExist(props.currentPatient.MI)}
-            <br/>
-            <br/>
-            ЧКВ: {isExist(props.currentPatient.CI)}
-            <br/>
-            <br/>
-            Инсульт: {isExist(props.currentPatient.insultOutcome)}
-            <br/>
-            <br/>
-            Смерть: {isExist(props.currentPatient.death)}
-            <br/>
-            <br/>
+          <div className="calculation-result">
+            <p>Инфаркт: {isExist(props.currentPatient.MI)}</p>
+            <p>ЧКВ: {isExist(props.currentPatient.CI)}</p>
+            <p>Инсульт: {isExist(props.currentPatient.insultOutcome)}</p>
+            <p>Смерть: {isExist(props.currentPatient.death)}</p>
           </div>
         </>
       )
@@ -161,7 +149,7 @@ function WizardFormPage(props) {
   }
 
   return (
-    <div className="form-container">
+    <div className="form-wizard">
       <Form {...props}>
         <Row>
           <Col xs={5}>
@@ -173,15 +161,11 @@ function WizardFormPage(props) {
             {formparametersSecondCol}
           </Col>
           </Row>
-        <div className="field is-grouped">
-          <div className="control">
-            {props.prevPage ? <Button type="button" className="left-button-in-form" onClick={props.prevPage}> Назад </Button> : ""}
+          <div className="form-navigation">
+            {props.prevPage ? <Button type="button" className="page-nav-button btn-back" onClick={props.prevPage}> Назад </Button> : ""}
             <Submit type="submit"> {props.result ? "Сохранить" : "Далее"} </Submit>
-            <br />
-            <br />
             <Reset />
           </div>
-        </div>
       </Form>
     </div>
   );

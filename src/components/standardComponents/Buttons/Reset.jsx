@@ -9,7 +9,7 @@ const Reset = () => {
     <Button
       disabled={pristine}
       type="button"
-      className="right-button-in-form"
+      className="page-nav-button btn-reset"
       onClick={reset}
     >
       Сброс

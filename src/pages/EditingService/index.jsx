@@ -76,7 +76,7 @@ function EditingServiceComponent(props) {
         additionalTableComponents={additionalTableComponents}
         menuItems = {userItems}
         activeItemId = {serviceNameState}
-        onSelect = { ({itemId}) => {selectHandle(itemId, setServiceNameState, setServiceTableHeaderState, props.navigate)} }
+        onSelect = { (itemId) => {selectHandle(itemId, setServiceNameState, setServiceTableHeaderState, props.navigate)} }
         handleExit={() => {handleExit(() => {props.navigate('/')}) }} //Передать колбэк без параметров
         handleNewPatient={() => { handleAddNew(props.navigate, '/' + serviceNameState +'/patient')}}
       />
