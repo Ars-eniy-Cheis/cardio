@@ -3,6 +3,8 @@ import { React, useEffect, useState } from "react"
 import { roles } from "../../../config"
 import { type } from "@testing-library/user-event/dist/type"
 
+import { useDispatch, useSelector } from "react-redux";
+
 const UserEditableCell = ({
     value: initialValue,
     row: { index },
@@ -11,13 +13,16 @@ const UserEditableCell = ({
 }) => {
     const [value, setValue] = useState(initialValue)
 
-    const onChange = e => {
-        setValue(e.target.value)
+    const dispatch = useDispatch()
+    const usersState = useSelector(state => state.users)
+
+    const setUsersState = (usersValue) => {
+        dispatch({ type: "SET_USERS", users: usersValue })
     }
 
-    const selectOnChange = e => {
+    const onChange = (e, key) => {
         setValue(e.target.value)
-        //updateData(index, id, e.target.value)
+        usersState[index][key] = e.target.value
     }
 
     const onBlur = () => {
@@ -47,11 +52,11 @@ const UserEditableCell = ({
                 <option value={i}>{i}</option>
             )
         }
-        return (<select value="role" onChange={selectOnChange} >
+        return (<select value="role" onChange={(e) => {onChange(e, id)}} >
             {options}
         </select>)
     }
-    return <input className="table-input" value={value} onChange={onChange} onBlur={onBlur} />
+    return <input className="table-input" value={value} onChange={(e) => {onChange(e, id)}} onBlur={onBlur} />
 }
 
 const UserColumn = {

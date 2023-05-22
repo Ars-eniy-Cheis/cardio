@@ -26,9 +26,9 @@ async function handleEnter (username, password, loginStateChanger, serviceNameSt
     loginStateChanger(username)
     //document.cookie = "accessToken=" + encodeURIComponent(token["accessToken"]) + "; samesite=strict"
     //document.cookie += "refreshToken=" + encodeURIComponent(token["refreshToken"]) + "; samesite=strict"
-    serviceNameStateChanger('cabs')
+    serviceNameStateChanger('admin')
     serviceTableHeaderStateChanger(cabsPatientsHeader)
-    navigate('/cabs')
+    navigate('/admin')
   } catch (e) {
     console.error(e)
     alert("Неверный логин или пароль")
@@ -140,7 +140,6 @@ async function handleChange (navigate, path, stateChanger, id){
 }
 
 async function handleDeletePatient (navigate, state, stateChanger, patientId) {
-    
     try{
       //await client.apis.patients.deletePatient({patientId})
       let newPatientsState = state.filter(patient => patient.id !== patientId)
@@ -156,20 +155,29 @@ async function handleGetUsers (stateChanger) {
     stateChanger(usersData.users)
 }
 
-async function handleDeleteUser (navigate, state, stateChanger, id) {
-    let user = new User({})
+async function handleChangeUser (user) {
+  try{
+    await client.apis.users.updateUser({"userId": user.id, "userUpdate": {"firstName": user.name, "middleName": user.fathersName, "lastName": user.surname, "login": user.login}})
+  } catch (e){
+    console.error(e)
+  }
+}
 
-    await user.deleteUser(localStorage.getItem('accessToken'), id)
+async function handleDeleteUser (userId) {
+  try{
+    await client.apis.users.deleteUser({userId})
+  } catch (e){
+    console.error(e)
+  }
+}
 
-    if (user.status >= 200 && user.status < 300) {
-      let newUsersState = state.filter(user => user.id !== id)
-      stateChanger(newUsersState)
-    }
-    else{
-      if(await handleUpdateToken(navigate)){
-        await handleDeleteUser (navigate, state, stateChanger, id)
-      }
-    }
+async function handleAddUser (user, handleSubmit) {
+  handleSubmit()
+  try{
+    await client.apis.users.addUser(user)
+  } catch (e){
+    console.error(e)
+  }
 }
 
 async function selectHandle (itemId, nameStateChanger, headerStateChanger, navigate) {
@@ -191,4 +199,4 @@ async function selectHandle (itemId, nameStateChanger, headerStateChanger, navig
 }
 
 export { handleExit, handleGetPatients, handleGetPatient, handleAddNew, handleChange, handleDeletePatient, 
-  handleGetUsers, handleDeleteUser, selectHandle, handleEventChange, handleEnter, handleGetParameters, handleSubmitWizard }
+  handleGetUsers, handleChangeUser, handleAddUser, handleDeleteUser, selectHandle, handleEventChange, handleEnter, handleGetParameters, handleSubmitWizard }

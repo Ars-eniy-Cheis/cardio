@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Table from "../../components/standardComponents/Tables/Table"
 
-import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import "../../styles/test.css"
 
 function EditingService(props) {
@@ -20,7 +19,7 @@ function EditingService(props) {
                 items={props.menuItems}
                 onLogout={props.handleExit}
             />
-            <div  className="edit">
+            <div className="edit">
                 <Table
                     defaultColumn={props.defaultColumn}
                     columns={props.columns}

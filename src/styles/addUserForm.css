@@ -25,3 +25,12 @@
   .form button {
     width: 100%;
   }
+
+  .error {
+    color: red;
+    font-size: 0.8rem;
+    margin-left: 5px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }

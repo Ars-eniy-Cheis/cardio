@@ -18,4 +18,11 @@ const userItems = [
     */
 ]
 
-export {userItems}
+const adminItems = [
+  {
+    title: 'Пользователи',
+    itemId: 'admin',
+  }
+]
+
+export {userItems, adminItems}

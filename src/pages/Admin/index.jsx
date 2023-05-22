@@ -5,9 +5,11 @@ import { withRouter } from '../../utils/withRouter';
 
 import { UserColumn } from "../../components/standardComponents/Cells/UserEditableCell";
 
-import { handleGetUsers, handleDeleteUser } from "../../model/app/Handlers";
+import { handleGetUsers, handleChangeUser, handleDeleteUser, handleExit, selectHandle } from "../../model/app/Handlers";
 
 import { usersHeader } from "../../config/tableHeaders";
+
+import { adminItems } from "../../config/sideMenuItems";
 
 import Admin from './Admin';
 
@@ -17,6 +19,14 @@ function AdminComponent(props) {
 
     const dispatch = useDispatch()
     const usersState = useSelector(state => state.users)
+
+    let serviceNameState = useSelector(state => state.serviceName)
+    if(!serviceNameState){
+      serviceNameState = localStorage.getItem('serviceName')
+    }
+    const setServiceNameState = (serviceName) => {
+        dispatch({ type: "SET_SERVICE_NAME", serviceName: serviceName })
+    }
 
     const setUsersState = (usersValue) => {
         dispatch({ type: "SET_USERS", users: usersValue })
@@ -40,10 +50,10 @@ function AdminComponent(props) {
                     <button className="tablebutton" onClick={() => { props.navigate('/admin/reset-password') }}> <tablebutton-text>Сброс пароля</tablebutton-text> </button>
                 </td>
                 <td>
-                    <button className="tablebutton" onClick={() => { handleDeleteUser(props.navigate, usersState, setUsersState, usersState[i].id) }}> <tablebutton-text>Удалить</tablebutton-text> </button>
+                    <button className="tablebutton" onClick={() => { handleDeleteUser(usersState[i].id) }}> <tablebutton-text>Удалить</tablebutton-text> </button>
                 </td>             
                 <td>
-                    <button className="tablebutton" onClick={() => { }}> <tablebutton-text>Сохранить</tablebutton-text> </button>
+                    <button className="tablebutton" onClick={() => { handleChangeUser(usersState[i]) }}> <tablebutton-text>Сохранить</tablebutton-text> </button>
                 </td>     
             </>
         )
@@ -66,6 +76,10 @@ function AdminComponent(props) {
             data={usersState}
             addUser={addUser}
             skipPageReset={skipPageReset}
+            menuItems = {adminItems}
+            activeItemId = {serviceNameState}
+            onSelect = { (itemId) => {selectHandle(itemId, setServiceNameState, () => {}, props.navigate)} }
+            handleExit={() => {handleExit(() => {props.navigate('/')}) }} //Передать колбэк без параметров
             additionalTableComponents={additionalTableComponents}
         />
     )

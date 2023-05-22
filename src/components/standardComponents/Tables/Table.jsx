@@ -75,7 +75,6 @@ function Table({ columns, data, skipPageReset, additionalTableComponents, defaul
                     })}
                 </tbody>
             </table>
-            
         </>
     )
 }
