@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useHistory } from "react-router-dom";
+
+import { handleResetUserPassword } from "../../model/app/Handlers";
 
 import { withRouter } from '../../utils/withRouter';
 
@@ -8,15 +11,13 @@ import "../../styles/ResetPassword.css";
 
 
 const ResetPassword = (props) => {
+
+  let currentManipulatingValueState = useSelector(state => state.currentManipulatingValue)
+
   const [newPassword, setNewPassword] = useState("");
 
   const handleChange = (event) => {
     setNewPassword(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("New password submitted:", newPassword);
   };
 
   const handleGoBack = () => {
@@ -32,7 +33,7 @@ const ResetPassword = (props) => {
         >
         Назад
     </button>
-      <form className="form" onSubmit={handleSubmit}>
+      <div className="form" >
         <label htmlFor="newPassword">Новый пароль:</label>
         <input
           type="password"
@@ -41,11 +42,11 @@ const ResetPassword = (props) => {
           onChange={handleChange}
         />
         <div className="reset-password-buttons">
-          <button className="standard-button" type="submit">
+          <button className="standard-button" type="button" onClick={() => {handleResetUserPassword(currentManipulatingValueState.id, newPassword)}}>
             Сохранить
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

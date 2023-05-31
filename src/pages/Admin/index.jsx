@@ -28,6 +28,10 @@ function AdminComponent(props) {
         dispatch({ type: "SET_SERVICE_NAME", serviceName: serviceName })
     }
 
+    const setCurrentManipulatingValueState = (currentManipulatingValue) => {
+        dispatch({ type: "SET_CURRENT_MANIPULATING_VALUE", currentManipulatingValue: currentManipulatingValue })
+    }
+
     const setUsersState = (usersValue) => {
         dispatch({ type: "SET_USERS", users: usersValue })
     }
@@ -42,12 +46,12 @@ function AdminComponent(props) {
     )
 
     const additionalTableComponents = [];
-    for(let i = 0; i < usersState.length; i++){
+    for(let i = 0; i < usersState.length; i++) {
         additionalTableComponents.push
         (
             <>
                 <td>
-                    <button className="tablebutton" onClick={() => { props.navigate('/admin/reset-password') }}> <tablebutton-text>Сброс пароля</tablebutton-text> </button>
+                    <button className="tablebutton" onClick={() => { setCurrentManipulatingValueState(usersState[i]); props.navigate('/admin/reset-password') }}> <tablebutton-text>Сброс пароля</tablebutton-text> </button>
                 </td>
                 <td>
                     <button className="tablebutton" onClick={() => { handleDeleteUser(usersState[i].id) }}> <tablebutton-text>Удалить</tablebutton-text> </button>

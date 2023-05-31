@@ -180,6 +180,16 @@ async function handleAddUser (user, handleSubmit) {
   }
 }
 
+async function handleResetUserPassword (userId, password) {
+  console.log("userId:",userId)
+  console.log("password:",password)
+  try{
+    await client.apis.users.resetUserPassword({userId, "resetPassword": {password}})
+  } catch (e){
+    console.error(e)
+  }
+}
+
 async function selectHandle (itemId, nameStateChanger, headerStateChanger, navigate) {
   console.log("itemId: ", itemId);
   localStorage.setItem('serviceName', itemId)
@@ -199,4 +209,4 @@ async function selectHandle (itemId, nameStateChanger, headerStateChanger, navig
 }
 
 export { handleExit, handleGetPatients, handleGetPatient, handleAddNew, handleChange, handleDeletePatient, 
-  handleGetUsers, handleChangeUser, handleAddUser, handleDeleteUser, selectHandle, handleEventChange, handleEnter, handleGetParameters, handleSubmitWizard }
+  handleGetUsers, handleChangeUser, handleAddUser, handleResetUserPassword, handleDeleteUser, selectHandle, handleEventChange, handleEnter, handleGetParameters, handleSubmitWizard }
