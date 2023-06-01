@@ -11,13 +11,13 @@ export default function TripleSelection(props) {
   let input1 = <Input className="form-wizard-radio" tabIndex="1" type="radio" name={props.name} value={keys[0]} />
   let input2 = <Input className="form-wizard-radio" tabIndex="2" type="radio" name={props.name} value={keys[1]} />
   let input3 = <Input tabIndex="3" type="radio" name={props.name} value={keys[2]} />
-  if (props.selected === keys[0] && props.selected != undefined) {
+  if (props.selected === keys[0] && props.selected !== undefined) {
     input1 = <Input className="form-wizard-radio" tabIndex="1" type="radio" name={props.name} value={keys[0]} checked />
   }
-  else if (props.selected === keys[1] && props.selected != undefined) {
+  else if (props.selected === keys[1] && props.selected !== undefined) {
     input2 = <Input className="form-wizard-radio" tabIndex="2" type="radio" name={props.name} value={keys[1]} checked />
   }
-  else if (props.selected === keys[2] && props.selected != undefined) {
+  else if (props.selected === keys[2] && props.selected !== undefined) {
     input3 = <Input className="form-wizard-radio" tabIndex="3" type="radio" name={props.name} value={keys[2]} checked />
   }
 

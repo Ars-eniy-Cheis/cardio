@@ -38,8 +38,7 @@ function PatientComponent(props) {
 
     useEffect(() => {
         if (!didMount.current) {
-            handleGetPatient(currentPatientIdState, setCurrentPatientState)
-            handleGetParameters(setCurrentParameters, currentServiceName)
+            handleGetPatient(currentPatientIdState, setCurrentPatientState, setCurrentParameters, currentServiceName)
         }
     }, [])
 
@@ -50,9 +49,8 @@ function PatientComponent(props) {
     const [getWizardState, wizard] = useMultipleForm();
 
     let result = []
-    console.log('currentServiceName:', currentServiceName)
     if(currentServiceName === 'covid') {
-        currentPatientState ? result.push(currentPatientState.death) : result.push(undefined)
+        currentPatientState ? result.push(currentPatientState.survived) : result.push(undefined)
     }
     else if(currentServiceName === 'cabs') {
         if(currentPatientState){
@@ -76,13 +74,9 @@ function PatientComponent(props) {
     }
     else{
         pages = []
-        console.log("currentParameters.length: ", currentParameters.length);
         let pageCount = parseInt(currentParameters.length/parametersPerWizardPage)
         if(currentParameters.length % parametersPerWizardPage > 0)
             pageCount++
-
-        console.log("pageCount: ", pageCount)
-        console.log("result: ", result)
         
         for(let i = 0; i < pageCount; i++){
             pages.push(

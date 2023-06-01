@@ -5,7 +5,7 @@ info:
   description: The API for the Cardio Center project
   version: "1.0"
 servers:
-- url: http://cardio/api/v1/
+- url: http://46.181.193.240:8080/kardio/api/
   description: Cardio Center API
   
 security:
@@ -299,6 +299,12 @@ paths:
           type: integer
           minimum: 1
           maximum: 100
+      - name: type
+        in: query
+        description: Disease type
+        schema:
+          type: string
+          enum: ["covid", "cabs"]
       responses:
         "200":
           description: Returns patients list
@@ -405,7 +411,7 @@ paths:
       tags:
         - patients
       description: Updates patient
-      operationId: updateCovidPatient
+      operationId: updatePatient
       parameters:
       - name: patientId
         in: path
@@ -545,6 +551,8 @@ components:
           type: string
         password:
           type: string
+        role:
+          type: string
   
     userUpdate:
       type: object
@@ -554,6 +562,8 @@ components:
         middleName:
           type: string
         lastName:
+          type: string
+        login:
           type: string
 
     patient:
@@ -648,6 +658,8 @@ components:
           type: boolean
           default: false
         limits:
+          type: object
+        enum:
           type: object
 
     formStep:

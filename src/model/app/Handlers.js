@@ -1,10 +1,10 @@
-import Token from '../../model/dataClasses/Token'
-import User from '../dataClasses/User'
 import Users from '../dataClasses/Users'
 
 import SwaggerClient from 'swagger-client'
 
-import { getClient } from '../../common'
+import jwtDecode from "jwt-decode";
+
+import { getClient, setClient } from '../../common'
 
 import { covidPatientsHeader, cabsPatientsHeader } from '../../config/tableHeaders'
 
@@ -12,46 +12,44 @@ import { wizardStateToPatientJSON } from '../utils'
 
 import {patientsCovid, patientsCabs, patientsAnswer, schemasAnswer} from '../dataClasses/fakeAnswers'
 
-let client = getClient().then( client => client)
-
 async function handleEventChange(event, eventSetter) {
   eventSetter(event.target.value);
 }
 
-async function handleEnter (username, password, loginStateChanger, serviceNameStateChanger, serviceTableHeaderStateChanger, navigate) {
+async function handleEnter (userName, password, loginStateChanger, serviceNameStateChanger, serviceTableHeaderStateChanger, navigate, exitHandler) {
   try{
-    //let token = await client.apis.users.loginUser({username, password})
-    let token = {"accessToken": "", "refreshToken": ""}
-    //client.clientAuthorizations.add('jwt', new SwaggerClient.ApiKeyAuthorization('Authorization', 'Bearer ' + token, 'header'));
-    loginStateChanger(username)
-    //document.cookie = "accessToken=" + encodeURIComponent(token["accessToken"]) + "; samesite=strict"
-    //document.cookie += "refreshToken=" + encodeURIComponent(token["refreshToken"]) + "; samesite=strict"
-    serviceNameStateChanger('admin')
-    serviceTableHeaderStateChanger(cabsPatientsHeader)
-    navigate('/admin')
+    let client = await getClient(exitHandler)
+    let token = await client.apis.users.loginUser({}, {requestBody: {userName, password} })
+    const decodedToken = jwtDecode(token.body.accessToken)
+    const requestInterceptor = (reuest) => {
+      reuest.headers["Authorization"] = token.body.accessToken
+    }
+    
+    client.requestInterceptor = requestInterceptor
+
+    loginStateChanger(userName)
+    document.cookie = "accessToken=" + encodeURIComponent(token["accessToken"]) + "; samesite=strict"
+    document.cookie += "refreshToken=" + encodeURIComponent(token["refreshToken"]) + "; samesite=strict"
+    if(decodedToken.role === 'admin'){
+      serviceNameStateChanger('admin')
+      serviceTableHeaderStateChanger(cabsPatientsHeader)
+      navigate('/admin')
+    } else if (decodedToken.role === 'user'){
+      serviceNameStateChanger('cabs')
+      serviceTableHeaderStateChanger(cabsPatientsHeader)
+      navigate('/cabs')
+    }
+    
   } catch (e) {
     console.error(e)
     alert("Неверный логин или пароль")
   }
 }
 
-async function handleUpdateToken (navigate) {
-  let token = new Token()
-  let updatedToken = await token.updateToken(localStorage.getItem('refreshToken'))
-  if (token.status >= 200 && token.status < 300) {
-    localStorage.setItem('accessToken', updatedToken.accessToken)
-    localStorage.setItem('refreshToken', updatedToken.refreshToken)
-    return true
-  }
-  else {
-    return false
-    handleExit(navigate)
-  }
-}
-
 async function handleExit (navigate) {
     try{
       //await client.apis.users.logoutUser()
+      localStorage.removeItem("swaggerClient")
       navigate()
     } catch (e){
       console.error(e)
@@ -60,36 +58,33 @@ async function handleExit (navigate) {
 
 async function handleGetPatients (stateChanger, type) {
   try {
-    //let patientsPagination = await client.apis.patients.getPatients({"page": 1, "pageSize": 100, "type": type})
-    let patientsPagination
+    let client = await getClient()
+    let patientsPagination = await client.apis.patients.getPatients({"page": 1, "pageSize": 100, "type": type})
     let patients = []
-    if( type === 'cabs'){
-      patientsPagination = patientsCabs
-    }
-    else if ( type === 'covid' ){
-      patientsPagination = patientsCovid
-    }
-    patientsPagination.contents.forEach(
+    patientsPagination.body[0].contents.forEach(
       (item, index, array) => {
-        patients.push({...item, ...item.properties})
+        patients.push({...item})
       }
     )
     stateChanger(patients)
+    console.log("patients:", patients)
   } catch (e){
     console.error(e)
   }
 }
 
-async function handleGetPatient (patientId, stateChanger) {
+async function handleGetPatient (patientId, stateChanger, setCurrentParameters, currentServiceName) {
   try{
     if(patientId !== -1){
-      //let patient = await client.apis.patients.getPatient({patientId})
-      let patient = patientsAnswer[0]
-      stateChanger(patient)
+      let client = await getClient()
+      let patient = await client.apis.patients.getPatient({patientId})
+      stateChanger({...patient.body.properties, id:patient.body.id})
     }
+    await handleGetParameters(setCurrentParameters, currentServiceName)
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
+
   
 }
 
@@ -100,7 +95,6 @@ async function handleGetParameters (stateChanger, label) {
     schemas.steps.forEach(
       (item, index, array) => {
         if(item.label === label) {
-          console.log(item.fields)
           stateChanger(item.fields)
         }
       }
@@ -115,13 +109,14 @@ async function handleSubmitWizard (navigate, patientState, patientStateChanger, 
   let patientJSON = await wizardStateToPatientJSON(getWizardState())
   console.log("patientJSON:", patientJSON)
   try{
-    if (!patientState) {
-      //patient = await client.apis.patients.addPatient({type: type, properties: patientJSON})
-      //patientStateChanger(patient)
+    let client = await getClient()
+    if (Object.keys(patientState).length === 0) {
+      patient = await client.apis.patients.addPatient({}, {requestBody: {type, properties: patientJSON, description: ""}})
+      patientStateChanger({...patient.body.properties, id: patient.body.id})
     }
     else{
-      //patient = await client.apis.patients.updatePatient({patientId: patientState.id, properties: patientJSON})
-      //patientStateChanger(patient)
+      patient = await client.apis.patients.updatePatient({patientId: patientState.id}, {requestBody: patientJSON})
+      patientStateChanger({...patient.body.properties, id: patient.body.id})
     }
   } catch (e) {
     console.error(e)
@@ -134,14 +129,16 @@ async function handleAddNew (navigate, path) {
 
 async function handleChange (navigate, path, stateChanger, id){
     if (stateChanger){
-        stateChanger(id)
+      console.log("id:",id);
+      stateChanger(id)
     }
     navigate(path)
 }
 
-async function handleDeletePatient (navigate, state, stateChanger, patientId) {
+async function handleDeletePatient (state, stateChanger, patientId) {
     try{
-      //await client.apis.patients.deletePatient({patientId})
+      let client = await getClient()
+      await client.apis.patients.deletePatient({patientId})
       let newPatientsState = state.filter(patient => patient.id !== patientId)
       stateChanger(newPatientsState)
     } catch (e){
@@ -150,48 +147,64 @@ async function handleDeletePatient (navigate, state, stateChanger, patientId) {
 }
 
 async function handleGetUsers (stateChanger) {
-    let usersData = new Users()
-    await usersData.getUsers(localStorage.getItem('accessToken'))
-    stateChanger(usersData.users)
-}
-
-async function handleChangeUser (user) {
-  try{
-    await client.apis.users.updateUser({"userId": user.id, "userUpdate": {"firstName": user.name, "middleName": user.fathersName, "lastName": user.surname, "login": user.login}})
+  try {
+    let client = await getClient()
+    let usersPagination = await client.apis.users.getUsers({"page": 1, "pageSize": 100})
+    let users = []
+    usersPagination.body[0].contents.forEach(
+      (item, index, array) => {
+        users.push({...item, ...item.properties})
+      }
+    )
+    stateChanger(users)
   } catch (e){
     console.error(e)
   }
 }
 
-async function handleDeleteUser (userId) {
+async function handleChangeUser (user) {
   try{
+    let client = await getClient()
+    await client.apis.users.updateUser({"userId": user.id}, {requestBody: {"firstName": user.firstName, "middleName": user.middleName, "lastName": user.lastName, "userName": user.userName}})
+  } catch (e){
+    console.error(e)
+  }
+}
+
+async function handleDeleteUser (state, stateChanger, userId) {
+  try{
+    let client = await getClient()
     await client.apis.users.deleteUser({userId})
+    let newUsersState = state.filter(patient => patient.id !== userId)
+    stateChanger(newUsersState)
   } catch (e){
     console.error(e)
   }
 }
 
 async function handleAddUser (user, handleSubmit) {
-  handleSubmit()
+  //handleSubmit()
   try{
-    await client.apis.users.addUser(user)
+    let client = await getClient()
+    await client.apis.users.addUser({}, {requestBody: user })
+    alert("Пользователь успешно добавлен")
   } catch (e){
+    alert("Пользователь с таким логином уже существует")
     console.error(e)
   }
 }
 
 async function handleResetUserPassword (userId, password) {
-  console.log("userId:",userId)
-  console.log("password:",password)
   try{
-    await client.apis.users.resetUserPassword({userId, "resetPassword": {password}})
+    let client = await getClient()
+    await client.apis.users.resetUserPassword({userId}, {requestBody: {password}})
+    alert("Пароль успешно обновлён")
   } catch (e){
     console.error(e)
   }
 }
 
 async function selectHandle (itemId, nameStateChanger, headerStateChanger, navigate) {
-  console.log("itemId: ", itemId);
   localStorage.setItem('serviceName', itemId)
   nameStateChanger(itemId)
   if(!itemId){

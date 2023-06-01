@@ -30,6 +30,7 @@ function WizardFormPage(props) {
       default:
           break
       case 'textInput':
+
         formparametersFirstCol.push(
           <TextInput 
             value={props.currentPatient[props.currentParameters[i].name]} 
@@ -124,12 +125,12 @@ function WizardFormPage(props) {
   }
 
   if(props.result){
-    console.log("props.currentPatient.death:", props.currentPatient.death);
     if(props.currentServiceName === 'covid'){
       formparametersSecondCol.push(
         <>
           <div className="calculation-result">
-            Летальный исход: { isExist(props.currentPatient.death) }
+            <p>ID пациента: {props.currentPatient.id}</p>
+            <p>Выживет: { isExist(props.currentPatient.survived) }</p>
           </div>
         </>
       )
@@ -138,6 +139,7 @@ function WizardFormPage(props) {
       formparametersSecondCol.push(
         <>
           <div className="calculation-result">
+            <p>ID пациента: {props.currentPatient.id}</p>
             <p>Инфаркт: {isExist(props.currentPatient.MI)}</p>
             <p>ЧКВ: {isExist(props.currentPatient.CI)}</p>
             <p>Инсульт: {isExist(props.currentPatient.insultOutcome)}</p>

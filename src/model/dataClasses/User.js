@@ -19,7 +19,6 @@ class User {
     }
 
     async addUser(accessToken, userJSON) {
-        console.log(userJSON);
         //this.answer = await Request.addUserAsync(refreshToken, userJSON)
         //this.status = await this.answer.status
         //let user = await this.answer.json()

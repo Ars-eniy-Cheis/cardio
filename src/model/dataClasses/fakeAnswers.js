@@ -35,7 +35,7 @@ const patientsCovid = {
       description: "",
       type: "covid",
       properties: {
-        death: true
+        survived: true
       },
       createdAt: 1672954315,
       updatedAt: 1672957315,
@@ -45,7 +45,7 @@ const patientsCovid = {
       description: "",
       type: "covid",
       properties: {
-        death: false
+        survived: false
       },
       createdAt: 1672704315,
       updatedAt: 1672867315,
@@ -55,7 +55,7 @@ const patientsCovid = {
       description: "",
       type: "covid",
       properties: {
-        death: true
+        survived: true
       },
       createdAt: 1672924315,
       updatedAt: 1672997315,
@@ -141,7 +141,7 @@ const patientsAnswer = [
       "HOBL": false,
       "HBP": false,
 
-      "death": false,
+      "survived": false,
 
       "cabsKind": false,
       "BMI": 35.5,
@@ -416,7 +416,7 @@ const schemasAnswer = {
           "name": "creatinine",
           "type": "textInput",
           "isRequired": false,
-          "limits": {"min": 50.0, "max": 300.0},
+          "limits": {"min": 50.0, "max": 400.0},
         },
         {
           "label": "АСТ",
@@ -444,7 +444,7 @@ const schemasAnswer = {
           "name": "leukocytes",
           "type": "textInput",
           "isRequired": false,
-          "limits": {"min": 0.5, "max": 20.0},
+          "limits": {"min": 0.5, "max": 30.0},
         },
         {
           "label": "Тромбоциты",
@@ -458,14 +458,14 @@ const schemasAnswer = {
           "name": "neutrophils",
           "type": "textInput",
           "isRequired": false,
-          "limits": {"min": 0.5, "max": 15.0},
+          "limits": {"min": 0.5, "max": 30.0},
         },
         {
           "label": "Лимфоциты",
           "name": "lymphocytes",
           "type": "textInput",
           "isRequired": false,
-          "limits": {"min": 0.5, "max": 15.0},
+          "limits": {"min": 0.1, "max": 15.0},
         },
         {
           "label": "D-димер",
@@ -533,7 +533,7 @@ const schemasAnswer = {
           "name": "neutrophilLymphocyteRatio",
           "type": "textInput",
           "isRequired": false,
-          "limits": {"min": 5.0, "max": 50.0},
+          "limits": {"min": 5.0, "max": 350.0},
         },
         {
           "label": "Степень тяжести",

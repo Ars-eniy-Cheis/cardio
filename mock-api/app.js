@@ -10,5 +10,4 @@ app.use('/api', apiMocker('mock-api'));
 app.use(cors());
 app.options('*', cors());
 
-console.log(`Mock API Server is up and running at: http://localhost:${port}`);
 app.listen(port);

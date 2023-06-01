@@ -12,7 +12,7 @@ const AddUser = (props) => {
     lastName: "",
     firstName: "",
     middleName: "",
-    username: "",
+    userName: "",
     password: "",
     role: "user",
   });
@@ -20,7 +20,7 @@ const AddUser = (props) => {
   const [errors, setErrors] = useState({
     lastName: "",
     firstName: "",
-    username: "",
+    userName: "",
     password: ""
   });
 
@@ -50,11 +50,11 @@ const AddUser = (props) => {
     let newErrors = {
       lastName: userData.lastName === "" ? "Обязательное поле" : "",
       firstName: userData.firstName === "" ? "Обязательное поле" : "",
-      username: userData.username === "" ? "Обязательное поле" : "",
+      userName: userData.userName === "" ? "Обязательное поле" : "",
       password: userData.password === "" ? "Обязательное поле" : "",
     };
 
-    if (newErrors.lastName || newErrors.firstName || newErrors.username || newErrors.password) {
+    if (newErrors.lastName || newErrors.firstName || newErrors.userName || newErrors.password) {
       setErrors(newErrors);
       return;
     }
@@ -93,15 +93,15 @@ const AddUser = (props) => {
         value={userData.middleName}
         onChange={handleChange}
       />
-      <label htmlFor="username">Логин:</label>
+      <label htmlFor="userName">Логин:</label>
       <input
         type="text"
-        name="username"
-        value={userData.username}
+        name="userName"
+        value={userData.userName}
         onChange={handleChange}
         required
       />
-      {errors.username && <div className="error">* {errors.username}</div>}
+      {errors.userName && <div className="error">* {errors.userName}</div>}
       <label htmlFor="password">Пароль:</label>
       <input
         type="password"

@@ -13,7 +13,7 @@ export async function wizardStateToPatientJSON (wizardState){
                 patient[key.substr(0, index)] = wizardState[key][key.substr(0, index)]
         }
         else {
-            patient[key] = wizardState[key]
+            patient[key] = Number(wizardState[key])
         }
     });
     return patient

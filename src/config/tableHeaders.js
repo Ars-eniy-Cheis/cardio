@@ -8,10 +8,6 @@ const cabsPatientsHeader = [
         accessor: 'createdAt',
     },
     {
-        Header: 'Дата обновления',
-        accessor: 'updatedAt',
-    },
-    {
         Header: 'Инфаркт миокарда',
         accessor: 'heartAttack',
     },
@@ -39,12 +35,8 @@ const covidPatientsHeader = [
         accessor: 'createdAt',
     },
     {
-        Header: 'Дата обновления',
-        accessor: 'updatedAt',
-    },
-    {
-        Header: 'Смерть',
-        accessor: 'death',
+        Header: 'Выживет',
+        accessor: 'survived',
     }
 ]
 
@@ -55,23 +47,23 @@ const usersHeader = [
     },
     {
         Header: 'Дата регистрации',
-        accessor: 'registrationDate',
+        accessor: 'createdAt',
     },
     {
         Header: 'Фамилия',
-        accessor: 'surname',
+        accessor: 'lastName',
     },
     {
         Header: 'Имя',
-        accessor: 'name',
+        accessor: 'firstName',
     },
     {
         Header: 'Отчество',
-        accessor: 'fathersName',
+        accessor: 'middleName',
     },
     {
         Header: 'Логин',
-        accessor: 'login',
+        accessor: 'userName',
     },
     {
         Header: 'Роль',

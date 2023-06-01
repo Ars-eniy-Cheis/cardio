@@ -45,7 +45,7 @@ function EditingServiceComponent(props) {
     (
       <>
         <td>
-          <button className="tablebutton" onClick={() => { handleDeletePatient(props.navigate, manipulatingDataState, setManipulatingDataState, manipulatingDataState[i].id) }}> <tablebutton-text>Удалить</tablebutton-text> </button>
+          <button className="tablebutton" onClick={() => { handleDeletePatient( manipulatingDataState, setManipulatingDataState, manipulatingDataState[i].id) }}> <tablebutton-text>Удалить</tablebutton-text> </button>
         </td>                
         <td>
           <button className="tablebutton" onClick={() => { handleChange(props.navigate, '/' + serviceNameState + '/patient', setCurrentManipulatingValueId, manipulatingDataState[i].id) }}> <tablebutton-text>Изменить</tablebutton-text> </button>

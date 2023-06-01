@@ -5,7 +5,7 @@ info:
   description: The API for the Cardio Center project
   version: "1.0"
 servers:
-- url: http://cardio/api/v1/
+- url: http://46.181.193.240:8080/kardio/api/
   description: Cardio Center API
   
 security:

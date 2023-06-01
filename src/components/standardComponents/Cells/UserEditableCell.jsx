@@ -36,7 +36,7 @@ const UserEditableCell = ({
     if (id === "id") {
         return value
     }
-    else if (id === "registrationDate") {
+    else if (id === "createdAt") {
         if (value !== 0) {
             return new Date(value * 1000).toLocaleDateString("en-GB")
         }

@@ -54,7 +54,7 @@ function AdminComponent(props) {
                     <button className="tablebutton" onClick={() => { setCurrentManipulatingValueState(usersState[i]); props.navigate('/admin/reset-password') }}> <tablebutton-text>Сброс пароля</tablebutton-text> </button>
                 </td>
                 <td>
-                    <button className="tablebutton" onClick={() => { handleDeleteUser(usersState[i].id) }}> <tablebutton-text>Удалить</tablebutton-text> </button>
+                    <button className="tablebutton" onClick={() => { handleDeleteUser(usersState, setUsersState, usersState[i].id) }}> <tablebutton-text>Удалить</tablebutton-text> </button>
                 </td>             
                 <td>
                     <button className="tablebutton" onClick={() => { handleChangeUser(usersState[i]) }}> <tablebutton-text>Сохранить</tablebutton-text> </button>

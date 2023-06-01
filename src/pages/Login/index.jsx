@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { withRouter } from '../../utils/withRouter';
 
-import { handleEventChange, handleEnter } from "../../model/app/Handlers";
+import { handleEventChange, handleEnter, handleExit } from "../../model/app/Handlers";
 
 import Login from './Login'
 
@@ -32,7 +32,7 @@ function LoginComponent(props) {
             handleLoginChange={(event) => {handleEventChange(event, setLogin)}}
             password={password}
             handlePasswordChange={(event) => {handleEventChange(event, setPassword)}}
-            handleEnter={() => {handleEnter(login, password, setLoginState, setServiceName, setServiceTableHeader, props.navigate)}}
+            handleEnter={() => {handleEnter(login, password, setLoginState, setServiceName, setServiceTableHeader, props.navigate, () => {handleExit(() => {props.navigate('/')}) })}}
         />
     )
 }
